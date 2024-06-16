@@ -24,6 +24,7 @@
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-md-3">
+				
 					<p class="phone-no">
 						<i class="anm anm-phone-s"></i> +84379967723
 					</p>
@@ -77,10 +78,10 @@
 						<ul id="siteNav" class="site-nav medium right hidearrow">
 							<li class="lvl1 parent megamenu"><a href="/">Trang chủ <i
 									class="anm anm-angle-down-l"></i></a></li>
-							<li class="lvl1 parent megamenu"><a href="/product/list?kw=">Sản
+							<li class="lvl1 parent megamenu"><a href="/product/list?kw=">Danh Sách Sản
 									phẩm <i class="anm anm-angle-down-l"></i>
 							</a>
-								<div class="megamenu style4">
+								<%-- <div class="megamenu style4">
 									<ul class="grid grid--uniform mmWrapper">
 										<li class="grid__item lvl-1 col-md-3 col-lg-3"><a
 											href="#" class="site-nav lvl-1">Danh mục sản phẩm</a>
@@ -103,7 +104,9 @@
 												</c:forEach>
 											</ul></li>
 									</ul>
-								</div></li>
+								</div></li> --%>
+							</a>
+								
 							<li class="lvl1"><a href="#"><b>Buy Now!</b> <i
 									class="anm anm-angle-down-l"></i></a></li>
 						</ul>

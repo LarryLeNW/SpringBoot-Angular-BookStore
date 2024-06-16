@@ -95,7 +95,7 @@
 							<!--Brand-->
 							<div class="sidebar_widget filterBox filter-widget">
 								<div class="widget-title">
-									<h2>Thương Hiệu</h2>
+									<h2>Lọc theo loại</h2>
 								</div>
 								<ul>
 									<form action="/product/list/brand">

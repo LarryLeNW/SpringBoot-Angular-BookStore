@@ -40,12 +40,15 @@ app.controller("product-ctrl", function ($scope, $http) {
     //HAM EDIT
     $scope.edit = function (id) {
         $http.get(`${urlProduct}/${id}`).then(resp => {
-            $scope.product = resp.data[0].product;
+			console.log(resp.data);
+            $scope.product = resp.data;
             $scope.product.createDate = new Date($scope.product.createDate);
             $scope.product.images = JSON.parse($scope.product.images);
         })
         $scope.chon = true;
     };
+    
+    
     //HAM UPLOAD HINH
     $scope.imageChanged = function (files) {
         $scope.product.images = [];

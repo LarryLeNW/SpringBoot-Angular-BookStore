@@ -21,7 +21,8 @@
 <link rel="stylesheet" href="/assets/css/style.css">
 <link rel="stylesheet" href="/assets/css/custom.css">
 <link rel="stylesheet" href="/assets/css/responsive.css">
-
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
 
 
@@ -33,6 +34,8 @@
 </head>
 
 
+
+
 <body ng-app="shopping-app" ng-controller="shopping-ctrl"
 	class="template-index belle home5-cosmetic">
 	
@@ -42,7 +45,51 @@
 		<!--Body Content-->
 		<div id="page-content">
 			<!--Home slider-->
-			
+
+			<div id="slider-home"> 
+<div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  </div>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="/images/banner/banner1.jpg" class="d-block w-100 " height="500px" alt="...">
+      <div class="carousel-caption d-none d-md-block">
+       <h5>Welcome to Our Store</h5>
+                        <p>Discover the latest trends and exclusive collections.</p>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="/images/banner/banner2.jpg" class="d-block w-100 " height="500px" alt="...">
+      <div class="carousel-caption d-none d-md-block">
+       <h5>Summer Sale</h5>
+                        <p>Up to 50% off on selected items. Don't miss out!</p>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="/images/banner/banner3.jpg" class="d-block w-100 " height="500px" alt="...">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>ABOUT</h5>
+        <p>FROM FPT POLYTECHNIC DANANG</p>
+      </div>
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>				
+			</div> 
+
+	
+
+
 			<!--End Home slider-->
 
 			<!--Collection Tab slider-->
@@ -59,7 +106,7 @@
 					<div class="row m-5">
 						<div class="col-12 col-sm-12 col-md-12 col-lg-12 ">
 							<div class="section-header text-center">
-								<h2 class="h2">Sản phẩm mới</h2>
+								<h2 class="h2">NEW BOOK 🔥</h2>
 							</div>
 						</div>
 					</div>

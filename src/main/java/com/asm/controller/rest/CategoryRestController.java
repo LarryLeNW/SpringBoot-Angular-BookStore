@@ -36,6 +36,7 @@ public class CategoryRestController {
 
 	@GetMapping("")
 	public List<Category> getAllCategory() {
+		System.out.println(cService.findAll());
 		return cService.findAll();
 	}
 
@@ -59,6 +60,7 @@ public class CategoryRestController {
 			return this.getAllCategory();
 		}
 	}
+	
 	@PostMapping("")
 	public ResponseEntity<Category> postCategory(@RequestBody Category cate){
 		if(cService.existsById(cate.getId())) {

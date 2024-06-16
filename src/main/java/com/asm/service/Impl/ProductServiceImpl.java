@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
 import com.asm.bean.Category;
 import com.asm.bean.Product;
 import com.asm.bean.ProductCategory;
-import com.asm.dao.ProductCategoryRepo;
+//import com.asm.dao.ProductCategoryRepo;
 import com.asm.dao.ProductRepo;
 import com.asm.service.ProductService;
 import com.asm.service.SessionService;
@@ -30,8 +30,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class ProductServiceImpl implements ProductService {
 	@Autowired
 	ProductRepo pRepo;
-	@Autowired
-	ProductCategoryRepo pcRepo;
+//	@Autowired
+//	ProductCategoryRepo pcRepo;
 	@Autowired
 	SessionService session;
 
@@ -65,10 +65,10 @@ public class ProductServiceImpl implements ProductService {
 		pRepo.deleteById(id);
 	}
 
-	@Override
-	public List<ProductCategory> findProductCategory() {
-		return pcRepo.findAll();
-	}
+//	@Override
+//	public List<ProductCategory> findProductCategory() {
+//		return pcRepo.findAll();
+//	}
 
 	@Override
 	public Product findByProductId(Long id) {
@@ -85,15 +85,15 @@ public class ProductServiceImpl implements ProductService {
 		return pRepo.save(product);
 	}
 
-	@Override
-	public void deleteProductCateById(Long id) {
-		pcRepo.deleteById(id);
-	}
-
-	@Override
-	public ProductCategory saveProductCates(ProductCategory productCates) {
-		return pcRepo.save(productCates);
-	}
+//	@Override
+//	public void deleteProductCateById(Long id) {
+//		pcRepo.deleteById(id);
+//	}
+//
+//	@Override
+//	public ProductCategory saveProductCates(ProductCategory productCates) {
+//		return pcRepo.save(productCates);
+//	}
 
 	@Override
 	public List<Map<String, Object>> findProductByCreateDateDESC() {
@@ -243,6 +243,8 @@ public class ProductServiceImpl implements ProductService {
 		Pageable page = PageRequest.of(p.orElse(0), 6);
 		return pRepo.findByListCategory(cid, page);
 	}
+
+
 	
 //	@Override
 //	public List<Map<String, Object>> findProductByKeywordAndPage(Optional<String> kw, Optional<String> cid, Optional<String> bid,

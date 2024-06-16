@@ -81,30 +81,19 @@
 							<li class="lvl1 parent megamenu"><a href="/product/list?kw=">Danh Sách Sản
 									phẩm <i class="anm anm-angle-down-l"></i>
 							</a>
-								<%-- <div class="megamenu style4">
+								<div class="megamenu style4">
 									<ul class="grid grid--uniform mmWrapper">
 										<li class="grid__item lvl-1 col-md-3 col-lg-3"><a
 											href="#" class="site-nav lvl-1">Danh mục sản phẩm</a>
 											<ul class="subLinks">
-												<c:forEach var="item" items="${cates}" end="4">
+												<c:forEach var="item" items="${brands}" end="4">
 													<li class="lvl-2"><a
-														href="/product/list?cid=${item.id}" class="site-nav lvl-2">${item.name}</a>
-													</li>
-												</c:forEach>
-											</ul></li>
-										<li class="grid__item lvl-1 col-md-3 col-lg-3"><a
-											href="#" class="site-nav lvl-1"></a>
-											<ul class="subLinks">
-												<li class="lvl-2"><a href="#" class="site-nav lvl-2"></a>
-												</li>
-												<c:forEach var="cate" items="${cates }" begin="5">
-													<li class="lvl-2"><a
-														href="/product/list?cid=${cate.id}" class="site-nav lvl-2">${cate.name}</a>
+														href="/product/list?bid=${item.id}" class="site-nav lvl-2">${item.name}</a>
 													</li>
 												</c:forEach>
 											</ul></li>
 									</ul>
-								</div></li> --%>
+								</div></li>
 							</a>
 								
 							<li class="lvl1"><a href="#"><b>Buy Now!</b> <i
@@ -141,7 +130,7 @@
 					class="anm anm-plus-l"></i></a>
 				<ul>
 					<li><a href="product-layout-1.html" class="site-nav"> </a></li>
-					<c:forEach var="cate" items="${categories }">
+					<c:forEach var="cate" items="${brands}">
 						<li><a href="/product/list?cate=${cate.id}" class="site-nav">${cate.name}</a></li>
 					</c:forEach>
 				</ul></li>

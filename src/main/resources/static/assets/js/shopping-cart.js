@@ -1,6 +1,5 @@
 var app = angular.module("shopping-app",[]);
 app.controller("shopping-ctrl", function($scope, $http){
-	
 	$scope.cart = {
 		items: [],
 		add(id){

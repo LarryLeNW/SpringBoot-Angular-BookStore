@@ -52,7 +52,7 @@ public class ProductRestController {
 		map.put("brands", bService.findAll());
 		map.put("categories", cService.findAll());
 		map.put("products", pService.findAll());
-		map.put("productCates", pService.findProductCategory());
+//		map.put("productCates", pService.findProductCategory());
 		return map;
 	}
 
@@ -118,13 +118,13 @@ public class ProductRestController {
 //			
 	}
 
-	@DeleteMapping("/productcategory/{id}")
-	public void deleteProductCategory(@PathVariable("id") Long id) {
-		pService.deleteProductCateById(id);
-	}
-
-	@PostMapping("/productcategory")
-	public ProductCategory postProductCategory(@RequestBody ProductCategory productCates) {
-		return pService.saveProductCates(productCates);
-	}
+//	@DeleteMapping("/productcategory/{id}")
+//	public void deleteProductCategory(@PathVariable("id") Long id) {
+//		pService.deleteProductCateById(id);
+//	}
+//
+//	@PostMapping("/productcategory")
+//	public ProductCategory postProductCategory(@RequestBody ProductCategory productCates) {
+//		return pService.saveProductCates(productCates);
+//	}
 }

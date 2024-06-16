@@ -59,6 +59,8 @@ public class ProductController {
 			}
 		return "product/list";
 	}
+	
+	
 	@GetMapping("/list/brand")
 	public String filterByListBrand(Model model,
 			@RequestParam("bid") List<String> bid,

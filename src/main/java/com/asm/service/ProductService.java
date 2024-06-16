@@ -26,15 +26,15 @@ public interface ProductService {
 
 	void deleteById(Long id);
 
-	List<ProductCategory> findProductCategory();
+//	List<ProductCategory> findProductCategory();
 	
 	Product findByProductId(Long id);
 
 	Product save(JsonNode data);
 
-	void deleteProductCateById(Long id);
+//	void deleteProductCateById(Long id);
 
-	ProductCategory saveProductCates(ProductCategory productCates);
+//	ProductCategory saveProductCates(ProductCategory productCates);
 
 	List<Map<String, Object>> findProductByCreateDateDESC();
 	

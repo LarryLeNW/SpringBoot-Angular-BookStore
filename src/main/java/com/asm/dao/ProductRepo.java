@@ -11,7 +11,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.asm.bean.Product;
-import com.asm.bean.ProductCategory;
+//import com.asm.bean.ProductCategory;
 
 
 @Repository
@@ -25,8 +25,8 @@ public interface ProductRepo extends JpaRepository<Product, Long>{
 //	@Query("SELECT DISTINCT p FROM Product p, ProductCategory pc WHERE p.id = pc.product.id AND pc.category.id = :cid AND p.name LIKE :name")
 //	public Page<Product> findByCategory(@Param("name") String name, @Param("cid") String cid, Pageable pageable);
 	
-	@Query("SELECT DISTINCT p FROM Product p, ProductCategory pc WHERE p.id = pc.product.id AND pc.category.id = :cid")
-	public Page<Product> findByCategory(@Param("cid") String cid, Pageable pageable);
+//	@Query("SELECT DISTINCT p FROM Product p, ProductCategory pc WHERE p.id = pc.product.id AND pc.category.id = :cid")
+//	public Page<Product> findByCategory(@Param("cid") String cid, Pageable pageable);
 	
 	@Query("SELECT p FROM Product p WHERE p.brand.id = :bid")
 	public Page<Product> findByBrand(@Param("bid") String bid, Pageable pageable);
@@ -40,8 +40,8 @@ public interface ProductRepo extends JpaRepository<Product, Long>{
 	
 	public Page<Product> findByPriceGreaterThanEqual(Double price, Pageable pageable);
 
-	@Query("SELECT DISTINCT p FROM Product p, ProductCategory pc WHERE p.id = pc.product.id AND pc.category.id IN :cid")
-	public Page<Product> findByListCategory(@Param("cid") List<String> cid, Pageable pageable);
+//	@Query("SELECT DISTINCT p FROM Product p, ProductCategory pc WHERE p.id = pc.product.id AND pc.category.id IN :cid")
+//	public Page<Product> findByListCategory(@Param("cid") List<String> cid, Pageable pageable);
 	
 	@Query("SELECT p FROM Product p WHERE p.id = :id")
 	public Product findByProductId(@Param("id") Long id);

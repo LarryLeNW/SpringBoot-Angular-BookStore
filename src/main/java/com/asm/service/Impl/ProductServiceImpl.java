@@ -15,9 +15,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
-import com.asm.bean.Category;
+//import com.asm.bean.Category;
 import com.asm.bean.Product;
-import com.asm.bean.ProductCategory;
+//import com.asm.bean.ProductCategory;
 //import com.asm.dao.ProductCategoryRepo;
 import com.asm.dao.ProductRepo;
 import com.asm.service.ProductService;
@@ -121,6 +121,7 @@ public class ProductServiceImpl implements ProductService {
 				db.add(map);
 			}
 		} catch (Exception e) {
+			System.out.println(e);
 			// TODO: handle exception
 		}
 		return db;
@@ -163,13 +164,13 @@ public class ProductServiceImpl implements ProductService {
 		return pRepo.findByBrand(brandId, pageable);
 	}
 	
-	@Override 
-	public Page<Product> findProductByCategory(Optional<String> cid, Optional<Integer> p){
-		String categoryId = cid.orElse(session.getValue("categoryId", ""));
-		session.set("categoryId", categoryId);
-		Pageable pageable = PageRequest.of(p.orElse(0), 12);
-		return pRepo.findByCategory(categoryId, pageable);
-	}
+//	@Override 
+//	public Page<Product> findProductByCategory(Optional<String> cid, Optional<Integer> p){
+//		String categoryId = cid.orElse(session.getValue("categoryId", ""));
+//		session.set("categoryId", categoryId);
+//		Pageable pageable = PageRequest.of(p.orElse(0), 12);
+//		return pRepo.findByCategory(categoryId, pageable);
+//	}
 	
 	@Override
 	public Page<Product> findProductByListBrand(List<String> bid, Optional<Integer> p){
@@ -239,10 +240,23 @@ public class ProductServiceImpl implements ProductService {
 		}
 		return map;
 	}
-	public Page<Product> findProductByListCategory(List<String> cid,  Optional<Integer> p){
-		Pageable page = PageRequest.of(p.orElse(0), 6);
-		return pRepo.findByListCategory(cid, page);
-	}
+	
+//	public Page<Product> findProductByListCategory(List<String> cid,  Optional<Integer> p){
+//		Pageable page = PageRequest.of(p.orElse(0), 6);
+//		return pRepo.findByListCategory(cid, page);
+//	}
+
+//	@Override
+//	public Page<Product> findProductByCategory(Optional<String> cid, Optional<Integer> p) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	@Override
+//	public Page<Product> findProductByListCategory(List<String> cid, Optional<Integer> p) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 
 
 	

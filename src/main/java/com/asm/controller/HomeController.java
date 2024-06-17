@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.asm.bean.Account;
 import com.asm.service.AccountService;
 import com.asm.service.BrandService;
-import com.asm.service.CategoryService;
+//import com.asm.service.CategoryService;
 import com.asm.service.MailerService;
 import com.asm.service.ProductService;
 import com.asm.service.SessionService;
@@ -21,8 +21,8 @@ import com.asm.service.SessionService;
 public class HomeController {
 	@Autowired
 	BrandService bService;
-	@Autowired
-	CategoryService cService;
+//	@Autowired
+//	CategoryService cService;
 	@Autowired
 	ProductService pService;
 	@Autowired

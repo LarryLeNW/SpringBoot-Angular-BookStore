@@ -9,7 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
 
 import com.asm.bean.Product;
-import com.asm.bean.ProductCategory;
+//import com.asm.bean.ProductCategory;
 import com.fasterxml.jackson.databind.JsonNode;
 
 public interface ProductService {
@@ -42,7 +42,7 @@ public interface ProductService {
 
 	Page<Product> findProductByBrand(Optional<String> bid, Optional<Integer> p);
 
-	Page<Product> findProductByCategory(Optional<String> cid, Optional<Integer> p);
+//	Page<Product> findProductByCategory(Optional<String> cid, Optional<Integer> p);
 	
 	Page<Product> findProductByListBrand(List<String> bid, Optional<Integer> p);
 	
@@ -56,7 +56,7 @@ public interface ProductService {
 
 	Map<String, Object> ProductDetail(Long id);
 	
-	Page<Product> findProductByListCategory(List<String> cid, Optional<Integer> p);
+//	Page<Product> findProductByListCategory(List<String> cid, Optional<Integer> p);
 	
 	
 //	Page<Product> findPageProduct(Optional<String> kw, Optional<String> cid, Optional<String> brandid, Optional<Integer> p);

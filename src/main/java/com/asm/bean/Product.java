@@ -34,21 +34,28 @@ public class Product implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
 	private String name;
+	
 	private Double price;
-	@Temporal(TemporalType.DATE)
+	
+	@Temporal(TemporalType.DATE)	
 	@Column(name = "createdate")
 	private Date createDate = new Date();
+	
 	private Boolean available;
+	
 	@ManyToOne
 	@JoinColumn(name = "brandid")
 	Brand brand;
 	private String images;
+	
 	@JsonIgnore
 	@OneToMany(mappedBy = "product")
 	List<OrderDetail> orderDetails;
-	@JsonIgnore
-	@OneToMany(mappedBy = "product")
-	List<ProductCategory> productCategories;
+	
+//	@JsonIgnore
+//	@OneToMany(mappedBy = "product")
+//	List<ProductCategory> productCategories;
 	
 }

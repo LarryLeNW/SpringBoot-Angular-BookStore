@@ -20,73 +20,73 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.asm.bean.Brand;
-import com.asm.bean.Category;
+//import com.asm.bean.Category;
 import com.asm.service.BrandService;
-import com.asm.service.CategoryService;
+//import com.asm.service.CategoryService;
 import com.asm.service.UploadService;
 
 @RestController
 @CrossOrigin(origins = "*")
 @RequestMapping("/admin/rest/categories")
 public class CategoryRestController {
-	@Autowired
-	CategoryService cService;
+//	@Autowired
+//	CategoryService cService;
 	@Autowired
 	UploadService uService;
 
-	@GetMapping("")
-	public List<Category> getAllCategory() {
-		System.out.println(cService.findAll());
-		return cService.findAll();
-	}
+//	@GetMapping("")
+//	public List<Category> getAllCategory() {
+//		System.out.println(cService.findAll());
+//		return cService.findAll();
+//	}
 
-	@GetMapping("/{id}")
-	public ResponseEntity<Category> getCategory(@PathVariable("id") String id) {
-		if (!cService.existsById(id)) {
-			return ResponseEntity.notFound().build();
-		} else {
-			
-			return ResponseEntity.ok(cService.findById(id));
-		}
-	}
+//	@GetMapping("/{id}")
+//	public ResponseEntity<Category> getCategory(@PathVariable("id") String id) {
+//		if (!cService.existsById(id)) {
+//			return ResponseEntity.notFound().build();
+//		} else {
+//			
+//			return ResponseEntity.ok(cService.findById(id));
+//		}
+//	}
 	
-	
-	@GetMapping("/search")
-	public List<Category> searchCategory(@RequestParam("kw") Optional<String> kw){
-		String keyword = kw.orElse(null);		
-		if(keyword != null) {
-			return cService.findByName("%"+keyword+"%");
-		}else {
-			return this.getAllCategory();
-		}
-	}
-	
-	@PostMapping("")
-	public ResponseEntity<Category> postCategory(@RequestBody Category cate){
-		if(cService.existsById(cate.getId())) {
-			return ResponseEntity.badRequest().build();
-		}else {
-			return ResponseEntity.ok(cService.save(cate));
-		}
-	}
-	
-	@PutMapping("/{id}")
-	public ResponseEntity<Category> putCategory(@PathVariable("id") String id, @RequestBody Category cate){
-		if(!cService.existsById(id)) {
-			return ResponseEntity.notFound().build();
-		}else {
-			return ResponseEntity.ok(cService.save(cate));
-		}
-	}
-	@DeleteMapping("/{id}")
-	public ResponseEntity<Void> deleteCategory(@PathVariable("id") String id){
-		if(!cService.existsById(id)) {
-			return ResponseEntity.notFound().build();
-		}else {
-			cService.deleteById(id);
-			return ResponseEntity.ok().build();
-		}
-	}
+//	
+//	@GetMapping("/search")
+//	public List<Category> searchCategory(@RequestParam("kw") Optional<String> kw){
+//		String keyword = kw.orElse(null);		
+//		if(keyword != null) {
+//			return cService.findByName("%"+keyword+"%");
+//		}else {
+//			return this.getAllCategory();
+//		}
+//	}
+//	
+//	@PostMapping("")
+//	public ResponseEntity<Category> postCategory(@RequestBody Category cate){
+//		if(cService.existsById(cate.getId())) {
+//			return ResponseEntity.badRequest().build();
+//		}else {
+//			return ResponseEntity.ok(cService.save(cate));
+//		}
+//	}
+//	
+//	@PutMapping("/{id}")
+//	public ResponseEntity<Category> putCategory(@PathVariable("id") String id, @RequestBody Category cate){
+//		if(!cService.existsById(id)) {
+//			return ResponseEntity.notFound().build();
+//		}else {
+//			return ResponseEntity.ok(cService.save(cate));
+//		}
+//	}
+//	@DeleteMapping("/{id}")
+//	public ResponseEntity<Void> deleteCategory(@PathVariable("id") String id){
+//		if(!cService.existsById(id)) {
+//			return ResponseEntity.notFound().build();
+//		}else {
+//			cService.deleteById(id);
+//			return ResponseEntity.ok().build();
+//		}
+//	}
 	
 }
 

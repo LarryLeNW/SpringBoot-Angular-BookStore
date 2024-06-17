@@ -19,14 +19,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.asm.bean.Account;
-import com.asm.bean.Category;
+//import com.asm.bean.Category;
 import com.asm.bean.Order;
 import com.asm.bean.OrderDetail;
 import com.asm.bean.Product;
 import com.asm.dao.OrderDetailRepo;
 import com.asm.service.AccountService;
 import com.asm.service.BrandService;
-import com.asm.service.CategoryService;
+//import com.asm.service.CategoryService;
 import com.asm.service.OrderService;
 import com.asm.service.ProductService;
 import com.asm.service.SessionService;
@@ -39,7 +39,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @RequestMapping("/order")
 public class OrderController {
 	@Autowired BrandService bService;
-	@Autowired CategoryService cService;
+//	@Autowired CategoryService cService;
 	@Autowired ProductService pService;
 	@Autowired AccountService aService;
 	@Autowired OrderService oService;

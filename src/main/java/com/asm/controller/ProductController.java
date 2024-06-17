@@ -17,11 +17,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.asm.bean.Category;
+//import com.asm.bean.Category;
 import com.asm.bean.Product;
-import com.asm.bean.ProductCategory;
+//import com.asm.bean.ProductCategory;
 import com.asm.service.BrandService;
-import com.asm.service.CategoryService;
+//import com.asm.service.CategoryService;
 import com.asm.service.ProductService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -32,7 +32,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @RequestMapping("/product")
 public class ProductController {
 	@Autowired BrandService bService;
-	@Autowired CategoryService cService;
+//	@Autowired CategoryService cService;
 	@Autowired ProductService pService;
 	
 	@RequestMapping("/list")
@@ -42,10 +42,10 @@ public class ProductController {
 			@RequestParam("bid") Optional<String> bid, 
 			@RequestParam("p") Optional<Integer> p) {
 			if(cid.isPresent()) {
-				Page<Product> lstProduct = pService.findProductByCategory(cid, p);
-				List<Map<String, Object>> products = pService.listProductSearch(lstProduct);
-				model.addAttribute("page", lstProduct);
-				model.addAttribute("products", products);
+//				Page<Product> lstProduct = pService.findProductByCategory(cid, p);
+//				List<Map<String, Object>> products = pService.listProductSearch(lstProduct);
+//				model.addAttribute("page", lstProduct);
+//				model.addAttribute("products", products);
 			}else if(bid.isPresent()) {
 				Page<Product> lstProduct = pService.findProductByBrand(bid, p);
 				List<Map<String, Object>> products = pService.listProductSearch(lstProduct);
@@ -105,18 +105,22 @@ public class ProductController {
 	public String detail(Model model,
 			@PathVariable("id") Long id) {
 		Map<String, Object> map = pService.ProductDetail(id);
-		model.addAttribute("product", map);
-		
 		Product product = (Product) map.get("product");
-		List<ProductCategory> productCates = product.getProductCategories();
-		List<String> categories = new ArrayList<String>();
-		for (ProductCategory productCate : productCates){
-			categories.add(productCate.getCategory().getId());
-		}
-		Optional<Integer> p = Optional.of(0);
-		Page<Product> pageProduct = pService.findProductByListCategory(categories, p);
-		List<Map<String, Object>> products = pService.listProductSearch(pageProduct);
-		model.addAttribute("productsRcm", products);
+		model.addAttribute("product",product);
+		
+		
+		
+		
+//		model.addAttribute("product",product);
+//		List<ProductCategory> productCates = product.getProductCategories();
+//		List<String> categories = new ArrayList<String>();
+//		for (ProductCategory productCate : productCates){
+//			categories.add(productCate.getCategory().getId());
+//		}
+//		Optional<Integer> p = Optional.of(0);
+//		Page<Product> pageProduct = pService.findProductByListCategory(categories, p);
+//		List<Map<String, Object>> products = pService.listProductSearch(pageProduct);
+//		model.addAttribute("productsRcm", new ArrayList<Product>());
 		return "product/product-detail";
 	}
 }

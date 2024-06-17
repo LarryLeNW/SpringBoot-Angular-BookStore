@@ -23,9 +23,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.asm.bean.Brand;
 import com.asm.bean.Product;
-import com.asm.bean.ProductCategory;
+//import com.asm.bean.ProductCategory;
 import com.asm.service.BrandService;
-import com.asm.service.CategoryService;
+//import com.asm.service.CategoryService;
 import com.asm.service.ProductService;
 import com.asm.service.UploadService;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -40,8 +40,8 @@ public class ProductRestController {
 	ProductService pService;
 	@Autowired
 	BrandService bService;
-	@Autowired
-	CategoryService cService;
+//	@Autowired
+//	CategoryService cService;
 
 	@Autowired
 	UploadService uService;
@@ -50,7 +50,7 @@ public class ProductRestController {
 	public Map<String, Object> get() {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("brands", bService.findAll());
-		map.put("categories", cService.findAll());
+//		map.put("categories", cService.findAll());
 		map.put("products", pService.findAll());
 //		map.put("productCates", pService.findProductCategory());
 		return map;

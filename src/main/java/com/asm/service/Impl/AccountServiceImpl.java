@@ -21,7 +21,7 @@ public class AccountServiceImpl implements AccountService {
 
 	@Override
 	public Account findByUsername(String username) {
-		return aRepo.findById(username).get();
+		return aRepo.findByUsername(username);
 	}
 
 	@Override
@@ -30,13 +30,13 @@ public class AccountServiceImpl implements AccountService {
 	}
 
 	@Override
-	public void deleteByUsername(String username) {
-		aRepo.deleteById(username);
+	public void deleteById(Long id) {
+		aRepo.deleteById(id);
 	}
 
 	@Override
-	public boolean existsById(String username) {
-		return aRepo.existsById(username);
+	public boolean existsById(Long id) {
+		return aRepo.existsById(id);
 	}
 
 	@Override
@@ -46,13 +46,21 @@ public class AccountServiceImpl implements AccountService {
 
 	@Override
 	public List<Account> findByUsernameLike(String username) {
-		return aRepo.findByUsernameLike(username);
+		return aRepo.findByFullname(username);
 	}
 
 	@Override
 	public Long countUserByRole(String roleId) {
 		 return aRepo.countByUserByRole(roleId);
 	}
+
+	@Override
+	public void deleteByUsername(String username) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
 
 
 

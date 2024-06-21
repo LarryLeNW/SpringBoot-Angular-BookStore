@@ -1,13 +1,14 @@
-var app = angular.module("shopping-app",[]);
-app.controller("shopping-ctrl", function($scope, $http){
+var app = angular.module("shopping-app", []);
+
+app.controller("shopping-ctrl", function($scope, $http) {
 	$scope.cart = {
 		items: [],
-		add(id){
+		add(id) {
 			var item = this.items.find(item => item.id == id);
-			if(item){
+			if (item) {
 				item.qty++;
 				this.saveToLocalStorage();
-			}else{
+			} else {
 				$http.get(`/rest/products/${id}`).then(resp => {
 					resp.data.qty = 1;
 					this.items.push(resp.data);
@@ -15,73 +16,77 @@ app.controller("shopping-ctrl", function($scope, $http){
 				})
 			}
 		},
-		minus(id){
+		minus(id) {
 			var index = this.items.findIndex(item => item.id == id);
-			if(this.items[index].qty == 1){
+			if (this.items[index].qty == 1) {
 				this.remove(id);
-			}else{
+			} else {
 				this.items[index].qty -= 1;
 				this.saveToLocalStorage();
 			}
 		},
-		remove(id){
+		remove(id) {
 			var index = this.items.findIndex(item => item.id == id);
 			this.items.splice(index, 1);
 			this.saveToLocalStorage();
 		},
-		get count(){
+		get count() {
 			return this.items
 				.map(item => item.qty)
-				.reduce((total, qty) => total += qty,0);
+				.reduce((total, qty) => total += qty, 0);
 		},
-		priceItem(id){
+		priceItem(id) {
 			var index = this.items.findIndex(item => item.id == id);
-			return this.items[index].qty * this.items[index].price ;
+			return this.items[index].qty * this.items[index].price;
 		},
-		get amount(){
+		get amount() {
 			return this.items
 				.map(item => item.qty * item.price)
 				.reduce((total, price) => total += price, 0);
 		},
-		saveToLocalStorage(){
+		saveToLocalStorage() {
 			var json = JSON.stringify(angular.copy(this.items));
-			localStorage.setItem("cart",json);
+			localStorage.setItem("cart", json);
 		},
-		clear(){
+		clear() {
 			this.items = [];
 			this.saveToLocalStorage();
 		},
-		loadFromLocalStorage(){
+		loadFromLocalStorage() {
 			var json = localStorage.getItem("cart");
-			this.items = json ? JSON.parse(json):[];
+			this.items = json ? JSON.parse(json) : [];
 		}
 	}
-	$scope.convertImage = function(json){
+	$scope.convertImage = function(json) {
 		var lstImage = JSON.parse(json);
 		return lstImage[0];
 	}
+
 	$scope.cart.loadFromLocalStorage();
-	
+
 	$scope.order = {
 		createDate: new Date(),
 		address: "",
-		account: {username: $("#username").text()},
-		get orderDetails(){
+		get orderDetails() {
 			return $scope.cart.items.map(item => {
 				return {
-					product: {id: item.id},
+					product: { id: item.id },
 					price: item.price,
 					quantity: item.qty
 				}
 			});
-		}, 
-		purchase(){
+		},
+		purchase() {
 			var order = angular.copy(this);
-			console.log(order);
+			order.account =
+				{ id: document.getElementById("userId").value }
+
+			console.log("info order2 : " + order.account.id);
+
 			$http.post('/rest/order', order).then(resp => {
 				alert("Đặt hàng thành công");
 				$scope.cart.clear();
-				location.href = "/order/detail/"+resp.data.id;
+				location.href = "/order/detail/" + resp.data.id;
 			}).catch(error => {
 				alert("Đặt hàng thất bại");
 				console.log(error);
@@ -89,6 +94,8 @@ app.controller("shopping-ctrl", function($scope, $http){
 		}
 	}
 });
-app.controller("register",function($scope, Shttp){
-	
+
+
+app.controller("register", function($scope, Shttp) {
+
 });

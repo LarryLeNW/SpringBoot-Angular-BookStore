@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <%@taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
+	pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <!DOCTYPE html>
 <html class="no-js" lang="en">
 
@@ -52,7 +52,170 @@
 				</div>
 				<!--End Breadcrumb-->
 
-				
+				<div id="ProductSection-product-template"
+					class="product-template__container prstyle1 container">
+
+
+					<div class="product-single">
+						<div class="row">
+
+							<!-- Review imgages product -->
+							<div class="col-lg-6 col-md-6 col-sm-12 col-12">
+								<div class="product-details-img">
+									<div class="zoompro-wrap product-zoom-right pl-20">
+										<div class="zoompro-span">
+											<img class="blur-up lazyload zoompro"
+												data-zoom-image="/images/product/${images[0]}" alt=""
+												src="/images/product/${images[0]}" />
+										</div>
+										<div class="product-buttons">
+											<a href="#" class="btn prlightbox" title="Zoom"><i
+												class="icon anm anm-expand-l-arrows" aria-hidden="true"></i></a>
+										</div>
+									</div>
+									<div class="lightboximages">
+										<c:forEach var="i" items="${images}">
+											<a href="/images/product/${i}" data-size="1462x2048"></a>
+										</c:forEach>
+									</div>
+									<div class="product-thumb">
+										<div id="gallery"
+											class="product-dec-slider-2 product-tab-left">
+											<c:forEach var="i" items="${images}">
+												<a data-image="/images/product/${i}"
+													data-zoom-image="/images/product/${i}"
+													class="slick-slide slick-cloned" data-slick-index="-4"
+													aria-hidden="true" tabindex="-1"> <img
+													class="blur-up lazyload" src="/images/product/${i}" alt="" />
+												</a>
+											</c:forEach>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!--End review imgages product -->
+
+							<!-- Info Product -->
+							<div class="col-lg-6 col-md-6 col-sm-12 col-12">
+								<div class="product-single__meta">
+									<h1 class="product-single__title">${product.name}</h1>
+									<div class="product-nav clearfix">
+										<a href="#" class="next" title="Next"><i
+											class="fa fa-angle-right" aria-hidden="true"></i></a>
+									</div>
+									<div class="prInfoRow">
+										<div class="product-stock">
+											<span class="instock ">In Stock</span>
+										</div>
+									</div>
+									<p
+										class="product-single__price product-single__price-product-template">
+										<span
+											class="product-price__price product-price__price-product-template">
+											<span id="ProductPrice-product-template"><span
+												class="money">${product.price}</span></span>
+										</span>
+									</p>
+									<div class="product-single__description rte ">
+										<p style="font-size: 1.7rem">${product.description}</p>
+									</div>
+									<form method="post" action="http://annimexweb.com/cart/add"
+										id="product_form_10508262282" accept-charset="UTF-8"
+										class="product-form product-form-product-template hidedropdown"
+										enctype="multipart/form-data">
+
+										<!-- Product Action -->
+										<div class="product-action clearfix">
+											<div class="product-form__item--submit">
+												<button ng-click="cart.add(${product.id}) " type="button"
+													name="add" class="btn product-form__cart-submit">
+													<span id="AddToCartText-product-template">Thêm vào
+														giỏ hàng</span>
+												</button>
+											</div>
+										</div>
+										<!-- End Product Action -->
+									</form>
+								</div>
+							</div>
+							<!-- End info Product -->
+							<div class="related-product grid-products">
+								<header class="section-header">
+									<h2 class="section-header__title text-center h2">
+										<span>Sản phẩm liên quan </span>
+									</h2>
+								</header>
+								<div class="productPageSlider">
+									<c:forEach var="p" items="${relatedListProduct}">
+										<c:if test="${p.product.id ne product.id}">
+											<div class="col-12 item">
+												<!-- start product image -->
+												<div class="product-image">
+													<!-- start product image -->
+													<a href="/product/detail/${p.product.id}"> <!-- image -->
+														<img class="product-rcm primary blur-up lazyload"
+														data-src="/images/product/${p.images[0]}"
+														src="/images/product/${p.images[0]}"
+														alt="${p.product.name}" title="${p.product.name}"> <!-- End image -->
+														<!-- Hover image --> <img class="hover blur-up lazyload"
+														data-src="/images/product/${p.images[1]}"
+														src="/images/product/${p.images[1]}"
+														alt="${p.product.name}" title="${p.product.name}"> <!-- End hover image -->
+													</a>
+													<!-- end product image -->
+
+													<!-- Start product button -->
+													<form class="variants add">
+														<button ng-click="cart.add(${p.product.id})"
+															class="btn btn-addto-cart" type="button" tabindex="0">ADD
+															TO CART</button>
+													</form>
+													<div class="button-set">
+														<div class="wishlist-btn">
+															<a class="wishlist add-to-wishlist" href="wishlist.html">
+																<i class="icon anm anm-heart-l"></i>
+															</a>
+														</div>
+													</div>
+													<!-- end product button -->
+												</div>
+												<!-- end product image -->
+
+												<!--start product details -->
+												<div class="product-details text-center">
+													<!-- product name -->
+													<div class="product-name">
+														<a href="/product/detail/${p.product.id}">${p.product.name}</a>
+													</div>
+													<!-- End product name -->
+													<!-- product price -->
+													<div class="product-price">
+														<span class="price">${p.product.price}</span>
+													</div>
+													<!-- End product price -->
+
+													<!-- Variant -->
+													<ul class="swatches">
+														<c:forEach var="i" items="${p.images}">
+															<li class="swatch medium rounded"><img
+																src="/images/product/${i}" alt="image" /></li>
+														</c:forEach>
+													</ul>
+													<!-- End Variant -->
+												</div>
+												<!-- End product details -->
+											</div>
+										</c:if>
+									</c:forEach>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+
+
 				<!--MainContent-->
 			</div>
 			<!--End Body Content-->

@@ -29,6 +29,7 @@
 
 <body ng-app="shopping-app" ng-controller="shopping-ctrl"
 	class="template-index belle home5-cosmetic">
+	
 	<div id="pre-loader">
 		<img src="/assets/images/loader.gif" alt="Loading..." />
 	</div>
@@ -96,6 +97,7 @@
 											<div id="username">${userDetail.username}</div>
 										</div>
 									</div>
+									<input type="hidden" id="userId" value="${userDetail.id}" ng-init="userId='${userDetail.id}'">
 									<div class="row">
 										<div class="form-group col-md-6 col-lg-6 col-xl-6 required">
 											<label for="input-firstname">Fullname<span
@@ -174,8 +176,6 @@
 							</div>
 
 							<hr />
-
-
 									<div class="order-button-payment">
 										<button ng-disabled="frmOrder.$invalid"
 											ng-click="order.purchase()" class="btn" value="Place order"

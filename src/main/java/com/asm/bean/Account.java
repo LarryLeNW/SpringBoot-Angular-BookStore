@@ -6,6 +6,8 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -21,18 +23,27 @@ import lombok.Setter;
 @NoArgsConstructor
 @Entity
 @Table(name = "Accounts")
-@Getter @Setter
+@Getter
+@Setter
 public class Account implements Serializable {
-	@Id
-	private String username;
-	private String password;
-	private String fullname;
-	private String email;
-	private String photo;
-	private Boolean activated;
-	private String roleId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	@JsonIgnore
-	@OneToMany(mappedBy = "account")
-	private List<Order> orders;
+    @Column(columnDefinition = "nvarchar(MAX)")
+    private String username;
+
+    private String password;
+
+    @Column(columnDefinition = "nvarchar(MAX)")
+    private String fullname;
+
+    private String email;
+    private String photo;
+    private Boolean activated;
+    private String roleId;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "account", fetch = FetchType.LAZY)
+    private List<Order> orders;
 }

@@ -64,14 +64,6 @@
 								<div class="widget-title">
 									<h2>Danh mục sản phẩm</h2>
 								</div>
-								<div class="widget-content">
-									<ul class="sidebar_categories">
-										<li class="lvl-1"><c:forEach var="c" items="${cates}">
-												<a href="/product/list?cid=${c.id}" class="site-nav">${c.name}</a>
-											</c:forEach></li>
-
-									</ul>
-								</div>
 							</div>
 							<!--Categories-->
 							<!--Price Filter-->
@@ -98,7 +90,7 @@
 									<h2>Lọc theo loại</h2>
 								</div>
 								<ul>
-									<form action="/product/list/brand">
+									 <form action="/product/list/brand" method="GET" onsubmit="return validateForm();">
 										<c:forEach var="b" items="${brands}">
 											<li>
 												<input type="checkbox" name="bid" value="${b.id}"
@@ -161,8 +153,8 @@
 													alt="${p.product.name}" title="${p.product.name}">
 													<!-- End image --> <!-- Hover image --> <img
 													class="product hover blur-up lazyload"
-													data-src="/images/product/${p.images[1]}"
-													src="/images/product/${p.images[1]}"
+													data-src="/images/product/${p.images[0]}"
+													src="/images/product/${p.images[0]}"
 													alt="${p.product.name}" title="${p.product.name}">
 													<!-- End hover image -->
 												</a>
@@ -268,6 +260,19 @@
 							jQuery('#modalOverly').hide();
 						}
 					});
+			function validateForm() {
+	            // Get all checkboxes with name 'bid'
+	            const checkboxes = document.querySelectorAll('input[name="bid"]');
+	            // Check if at least one checkbox is checked
+	            for (let checkbox of checkboxes) {
+	                if (checkbox.checked) {
+	                    return true;
+	                }
+	            }
+	            // If no checkbox is checked, show alert and prevent form submission
+	            alert('Please select at least one brand.');
+	            return false;
+	        }
 		</script>
 		<!--End For Newsletter Popup-->
 	</div>

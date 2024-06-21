@@ -38,7 +38,7 @@ public class ReportRestController {
 	public Map<String, Object> total() {
 		Integer month = this.monthCurrent();
 		Map<String, Object> db = new HashMap<String, Object>();
-		db.put("totalCustomer", aService.countUserByRole("customer"));
+		db.put("totalCustomer", aService.countUserByRole("USER"));
 		
 		List<Order> orders = oService.findOrderInMonth(month);
 		Double totalCost = 0.0;
@@ -52,6 +52,9 @@ public class ReportRestController {
 		db.put("totalOrder", oService.countOrderInMonth(month));
 		return db;
 	}
+	
+	
+	
 	@GetMapping("/reportcost")
 	public List<ReportCost> reportCostInMonth(){
 		List<ReportCost> lst = rpService.reportCostInMonth(this.monthCurrent());

@@ -308,7 +308,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder { opacity:1; -ms-fil
 	#siteNav > li > a:hover:hover,
 	#siteNav > li > a:hover { color:#339498; }
 	
-	#siteNav > li .megamenu { opacity:0; visibility:hidden; padding:25px 25px 0; width:100%; position:absolute; top:59px; left:0; z-index:999; background-color:#fff; box-shadow: 2px 2px 1px 0px rgba(0,0,0,0.3); -webkit-box-shadow: 2px 2px 1px 0px rgba(0,0,0,0.3); pointer-events:none; -ms-transition:all 0.3s ease; -webkit-transition:all 0.3s ease; transition:all 0.3s ease; border:1px solid #eee; max-height:600px; overflow:auto; }
+	#siteNav > li .megamenu { opacity:0; visibility:hidden; padding:14px 14px 0; width:40%; position:absolute; top:59px; left:0; z-index:999; background-color:red; box-shadow: 2px 2px 1px 0px rgba(0,0,0,0.3); -webkit-box-shadow: 2px 2px 1px 0px rgba(0,0,0,0.3); pointer-events:none; -ms-transition:all 0.3s ease; -webkit-transition:all 0.3s ease; transition:all 0.3s ease; border:1px solid #eee; max-height:600px; overflow:auto; }
 	#siteNav > li .megamenu ul { padding:0; list-style:none; }
 	#siteNav > li:hover > .megamenu { top:40px; opacity:1; visibility:visible; pointer-events:visible; }
 	#siteNav > li .megamenu li.lvl-1 { margin-bottom:25px; }
@@ -443,7 +443,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder { opacity:1; -ms-fil
 .grid-view-item.style2 .button-set a.quick-view, .grid-view-item.style2 .button-set .wishlist-btn, .grid-view-item.style2 .button-set .compare-btn, .grid-view-item.style2 .button-set > form { display:inline-block; margin:0 2px; vertical-align:middle; }
 .grid-view-item.style2 .button-set i { line-height:35px; }
 .grid-view-item.style2 .button-set > form button { padding:0; width:35px; height:35px; }
-.grid-view_image { position:relative; overflow:hidden; margin:0 auto 15px; }
+.grid-view_image { position:relative; overflow:hidden; margin:0 auto 15px; height: 50px ; width: 50px; }
 .grid-products.style3 .item .product-name { margin-bottom:10px; }
 .grid-products.style3 .item .product-image { margin:0 auto; }
 

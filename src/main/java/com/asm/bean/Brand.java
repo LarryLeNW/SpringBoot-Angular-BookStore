@@ -3,6 +3,7 @@ package com.asm.bean;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -22,7 +23,10 @@ import lombok.NoArgsConstructor;
 public class Brand implements Serializable{
 	@Id
 	private String id;
+	
+	@Column(columnDefinition = "nvarchar(MAX)")
 	private String name;
+	
 	private String image;
 	@JsonIgnore
 	@OneToMany(mappedBy = "brand")

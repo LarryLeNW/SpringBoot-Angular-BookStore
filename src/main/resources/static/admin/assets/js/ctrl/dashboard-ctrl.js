@@ -42,8 +42,10 @@ app.controller("dashboard-ctrl", function ($scope, $http) {
   });
 
   $http.get('/admin/rest/report/bestSellerInMonth').then(resp => {
+	
     $scope.productInMonth = resp.data;
-    for(var i = 0; i < 5; i++){
+	console.log(resp.data)
+    for(var i = 0; i < $scope.productInMonth.length; i++){
       $scope.productName.push($scope.productInMonth[i].name);
       $scope.productCount.push($scope.productInMonth[i].count);
     }
@@ -105,6 +107,6 @@ app.controller("dashboard-ctrl", function ($scope, $http) {
     );
   }
   $scope.reportProduct();
-   $scope.reportCost();
+  $scope.reportCost();
 });
 

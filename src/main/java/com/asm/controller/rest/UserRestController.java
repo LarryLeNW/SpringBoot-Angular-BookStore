@@ -42,14 +42,14 @@ public class UserRestController {
 		return aService.findAll();
 	}
 
-	@GetMapping("/{username}")
-	public ResponseEntity<Account> getAccount(@PathVariable("username") String username) {
-		if (!aService.existsById(username)) {
-			return ResponseEntity.notFound().build();
-		} else {
-			return ResponseEntity.ok(aService.findByUsername(username));
-		}
-	}
+//	@GetMapping("/{username}")
+//	public ResponseEntity<Account> getAccount(@PathVariable("username") String username) {
+//		if (!aService.existsById(username)) {
+//			return ResponseEntity.notFound().build();
+//		} else {
+//			return ResponseEntity.ok(aService.findByUsername(username));
+//		}
+//	}
 
 	@GetMapping("/authorities")
 	public Map<String, Object> getAuthority() {
@@ -78,39 +78,39 @@ public class UserRestController {
 		}
 	}
 
-	@PostMapping("")
-	public ResponseEntity<Account> postAccount(@RequestBody Account Account) {
-		if (aService.existsById(Account.getUsername())) {
-			return ResponseEntity.badRequest().build();
-		} else {
-			return ResponseEntity.ok(aService.save(Account));
-		}
-	}
+//	@PostMapping("")
+//	public ResponseEntity<Account> postAccount(@RequestBody Account Account) {
+//		if (aService.existsById(Account.getUsername())) {
+//			return ResponseEntity.badRequest().build();
+//		} else {
+//			return ResponseEntity.ok(aService.save(Account));
+//		}
+//	}
 
-	@PutMapping("/{username}")
-	public ResponseEntity<Account> putAccount(@PathVariable("username") String username, @RequestBody Account Account) {
-		if (!aService.existsById(username)) {
-			return ResponseEntity.notFound().build();
-		} else {
-			return ResponseEntity.ok(aService.save(Account));
-		}
-	}
+//	@PutMapping("/{username}")
+//	public ResponseEntity<Account> putAccount(@PathVariable("username") String username, @RequestBody Account Account) {
+//		if (!aService.existsById(username)) {
+//			return ResponseEntity.notFound().build();
+//		} else {
+//			return ResponseEntity.ok(aService.save(Account));
+//		}
+//	}
 
-	@DeleteMapping("/{username}")
-	public ResponseEntity<Void> deleteAccount(@PathVariable("username") String username) {
-		if (!aService.existsById(username)) {
-			return ResponseEntity.notFound().build();
-		} else {
-			Account Account = aService.findByUsername(username);
-			String filename = Account.getPhoto();
-			System.out.println(filename);
-			if (!filename.equalsIgnoreCase("logo.jpg")) {
-				uService.delete("account", filename);
-			}
-			aService.deleteByUsername(username);
-			return ResponseEntity.ok().build();
-		}
-	}
+//	@DeleteMapping("/{username}")
+//	public ResponseEntity<Void> deleteAccount(@PathVariable("username") String username) {
+//		if (!aService.existsById(username)) {
+//			return ResponseEntity.notFound().build();
+//		} else {
+//			Account Account = aService.findByUsername(username);
+//			String filename = Account.getPhoto();
+//			System.out.println(filename);
+//			if (!filename.equalsIgnoreCase("logo.jpg")) {
+//				uService.delete("account", filename);
+//			}
+//			aService.deleteByUsername(username);
+//			return ResponseEntity.ok().build();
+//		}
+//	}
 
 	// @DeleteMapping("/authorities/{id}")
 	// public void deleteAuthorities(@PathVariable("id") Long id) {

@@ -79,9 +79,7 @@ public class ProductServiceImpl implements ProductService {
 	public Product save(JsonNode data) {
 		ObjectMapper mapper = new ObjectMapper();
 		Product product = mapper.convertValue(data.get("p"), Product.class);
-
 		pRepo.save(product);
-
 		return pRepo.save(product);
 	}
 
@@ -178,6 +176,8 @@ public class ProductServiceImpl implements ProductService {
 		Pageable pageable = PageRequest.of(p.orElse(0), 12);
 		return pRepo.findByListBrand(bid, pageable);
 	}
+	
+	
 	@Override
 	public Page<Product> findProductLessThanPrice(Double price, Optional<Integer> p){
 		session.set("price", price);
@@ -199,6 +199,7 @@ public class ProductServiceImpl implements ProductService {
 		Pageable pageable = PageRequest.of(p.orElse(0), 12);
 		return pRepo.findByPriceGreaterThanEqual(price, pageable);
 	}
+	
 	@Override
 	public List<Map<String, Object>> listProductSearch(Page<Product> lstProduct){
 		List<Product> products = lstProduct.getContent();
@@ -219,6 +220,7 @@ public class ProductServiceImpl implements ProductService {
 				db.add(map);
 			}
 		} catch (Exception e) {
+			System.out.println(e);
 			// TODO: handle exception
 		}
 		return db;

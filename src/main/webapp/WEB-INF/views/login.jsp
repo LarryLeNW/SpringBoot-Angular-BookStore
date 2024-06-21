@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%@taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
+<%@taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <!DOCTYPE html>
 <html class="no-js" lang="en">
 
@@ -36,7 +36,7 @@
 		<%@include file="./layout/_header.jsp"%>
 
 		<!--Body Content-->
-		<div id="page-content">
+		<div id="login">
 			<!--Page Title-->
 			<div class="page section-header text-center mt-5">
 				<div class="page-title">
@@ -47,58 +47,44 @@
 			</div>
 			<!--End Page Title-->
 
-			<div class="container">
-				<div class="row">
-					<div
-						class="col-12 col-sm-12 col-md-6 col-lg-6 main-col offset-md-3">
-						<div class="mb-4">
-							<form method="post" action="/login"
-								id="CustomerLoginForm" accept-charset="UTF-8"
-								class="contact-form">
-								<div class="row">
-									<div class="col-12 col-sm-12 col-md-12 col-lg-12">
-										<div class="form-group">
-											<label for="CustomerEmail">Username</label> <input
-												type="text" name="username" placeholder=""
-												id="CustomerEmail" class="" autocorrect="off"
-												autocapitalize="off" autofocus="">
-										</div>
-									</div>
-									<div class="col-12 col-sm-12 col-md-12 col-lg-12">
-										<div class="form-group">
-											<label for="CustomerPassword">Mật khẩu</label> <input
-												type="password" value="" name="password" placeholder=""
-												id="CustomerPassword" class="">
-										</div>
-									</div>
-									<div class="col-12 col-sm-12 col-md-12 col-lg-12">
-										<div class="form-group">
-											<label>Ghi nhớ</label> <input type="checkbox"
-												name="remember-me">
-										</div>
-									</div>
-									<div class="col-12 col-sm-12 col-md-12 col-lg-12">
-										<div class="form-group">
-											<c:if test="${not empty message }">
-												<i style="color: red; font-weight: bold">${message}</i>
-											</c:if>
-										</div>
-									</div>
-								</div>
-								<div class="row">
-									<div class="text-center col-12 col-sm-12 col-md-12 col-lg-12">
-										<input type="submit" class="btn mb-3" value="Đăng nhập">
-										<p class="mb-4">
-											<a href="forgot-password" id="RecoverPassword">Quên mật khẩu?</a> &nbsp; |
-											&nbsp; <a href="register" id="customer_register_link">Tạo
-												tài khoản?</a>
-										</p>
-									</div>
-								</div>
-							</form>
+			<div class="container rounded border border-warning p-2">
+				<form method="post" action="/login" accept-charset="UTF-8">
+					<div class="mb-3">
+						<label for="exampleInputEmail1" class="form-label">Username</label>
+						<input type="username" name="username" class="form-control"
+							id="exampleInputEmail1" aria-describedby="emailHelp"
+							placeholder="enter username...">
+					</div>
+					<div class="mb-3">
+						<label for="exampleInputPassword1" class="form-label">Password</label>
+						<input type="password" class="form-control" name="password"
+							id="exampleInputPassword1" placeholder="enter passowrd">
+					</div>
+					<div class="mb-3 form-check">
+						<input type="checkbox" class="form-check-input" id="exampleCheck1"
+							name="remember-me"> <label class="form-check-label"
+							for="exampleCheck1">Check me out</label>
+					</div>
+					
+					<button type="submit" class="btn btn-primary w-100 mx-auto">Submit</button>
+					
+					<div class="row">
+						<div class="text-center col-12 col-sm-12 col-md-12 col-lg-12">
+							<p class="mb-4">
+								<a href="forgot-password" id="RecoverPassword">Quên mật
+									khẩu?</a> &nbsp; | &nbsp; <a href="register"
+									id="customer_register_link">Tạo tài khoản?</a>
+							</p>
 						</div>
 					</div>
-				</div>
+					<div class="col-12 col-sm-12 col-md-12 col-lg-12">
+						<div class="form-group">
+							<c:if test="${not empty message }">
+								<i style="color: red; font-weight: bold">${message}</i>
+							</c:if>
+						</div>
+					</div>
+				</form>
 			</div>
 
 		</div>

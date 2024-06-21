@@ -110,13 +110,11 @@
 							</div>
 						</div>
 					</div>
-					<div class="grid-products">
-						<div class="row">
+					<div class="grid-container-product-rw-custom">
 							<c:forEach var="d" items="${db}" end="14">
 								<div
-									class="col-6 col-sm-6 col-md-4 col-lg-4 item grid-view-item style2">
+									class="product-review-custom">
 									<div class="grid-view_image">
-
 										<!-- start product image -->
 										<a href="/product/detail/${d.product.id}"
 											class="grid-view-item__link"> <!-- image --> <img
@@ -173,7 +171,6 @@
 							</c:forEach>
 
 
-						</div>
 					</div>
 					<div class="col-12 col-sm-12 col-md-12 col-lg-12">
 						<div class="section-header text-center">

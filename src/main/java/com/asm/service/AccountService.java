@@ -15,8 +15,6 @@ public interface AccountService {
 
 	void deleteByUsername(String username);
 
-	boolean existsById(String username);
-
 	List<Account> findByFullname(String fullname);
 
 	// void deleteRoleDetail(Long id);
@@ -24,6 +22,10 @@ public interface AccountService {
 	List<Account> findByUsernameLike(String username);
 	
 	Long countUserByRole(String roleId);
+
+	void deleteById(Long id);
+
+	boolean existsById(Long id);
 
 
 }

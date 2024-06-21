@@ -1,5 +1,7 @@
 package com.asm.controller;
 
+import java.sql.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,8 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.asm.bean.Account;
+import com.asm.bean.Favourite;
+import com.asm.bean.Product;
 import com.asm.service.AccountService;
 import com.asm.service.BrandService;
+import com.asm.service.FavouriteService;
 //import com.asm.service.CategoryService;
 import com.asm.service.MailerService;
 import com.asm.service.ProductService;
@@ -31,6 +36,9 @@ public class HomeController {
 	AccountService aService;
 	@Autowired
 	MailerService mailer;
+	
+	@Autowired
+	FavouriteService fService;
 
 	@RequestMapping("/admin")
 	public String admin() {
@@ -41,6 +49,12 @@ public class HomeController {
 	public String home(Model model) {
 		// load ds product xep theo ngay tao
 		model.addAttribute("db", pService.findProductByCreateDateDESC());
+		
+		System.out.println("------------------------------------");
+		fService.save(new Favourite());
+		System.out.println(fService.findAll());
+		System.out.println("------------------------------------");
+		
 		return "home/index";
 	}
 
@@ -57,15 +71,13 @@ public class HomeController {
 	@PostMapping("/register")
 	public String signup(Model model,
 			@ModelAttribute Account account) {
-		if (aService.existsById(account.getUsername())) {
+		if (aService.findByUsername(account.getUsername()) != null) {
 			model.addAttribute("error", "Đã tồn tại username " + account.getUsername());
 			return "register";
 		} else {
 			account.setActivated(true);
-
 			account.setPhoto("logo.jpg");
-			account.setRoleId("user");
-			
+			account.setRoleId("USER");
 			aService.save(account);
 			return "redirect:/register/success";
 		}

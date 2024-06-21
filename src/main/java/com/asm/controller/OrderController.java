@@ -38,24 +38,29 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Controller
 @RequestMapping("/order")
 public class OrderController {
-	@Autowired BrandService bService;
+	@Autowired
+	BrandService bService;
 //	@Autowired CategoryService cService;
-	@Autowired ProductService pService;
-	@Autowired AccountService aService;
-	@Autowired OrderService oService;
-	@Autowired SessionService session;
-	
+	@Autowired
+	ProductService pService;
+	@Autowired
+	AccountService aService;
+	@Autowired
+	OrderService oService;
+	@Autowired
+	SessionService session;
+
 	@RequestMapping("/list")
 	public String listOrder(Model model) {
 		Account account = session.get("user");
 		List<Order> orders = oService.findByUsername(account.getUsername());
 
-		List<Map<String, Object>> db = new ArrayList<Map<String,Object>>();
-		for(Order order : orders ) {
+		List<Map<String, Object>> db = new ArrayList<Map<String, Object>>();
+		for (Order order : orders) {
 			Map<String, Object> map = new HashMap<String, Object>();
 			List<OrderDetail> orderDetail = order.getOrderDetails();
 			Double total = (double) 0;
-			for(OrderDetail od : orderDetail) {
+			for (OrderDetail od : orderDetail) {
 				total += od.getPrice() * od.getQuantity();
 			}
 			map.put("order", order);
@@ -65,34 +70,35 @@ public class OrderController {
 		model.addAttribute("orders", db);
 		return "order/list";
 	}
+
 	@RequestMapping("/cart")
 	public String cart() {
 		return "order/cart";
 	}
+
 	@RequestMapping("/checkout")
 	public String checkout(Model model) {
 		model.addAttribute("userDetail", session.get("user"));
 		return "order/checkout";
 	}
+
 	@RequestMapping("/detail/{id}")
-	public String detail(Model model, 
-			Principal principal,
-			@PathVariable("id") Long id) {
+	public String detail(Model model, Principal principal, @PathVariable("id") Long id) {
 		Order order = oService.findById(id);
 		Account account = session.get("user");
 		String acc = account.getUsername();
-		if(!order.getAccount().getUsername().equals(acc)) {
+		if (!order.getAccount().getUsername().equals(acc)) {
 			return "redirect:/login?message=Access%20Denied";
-		}else {
+		} else {
 			model.addAttribute("order", order);
 			List<OrderDetail> orderDetail = order.getOrderDetails();
 			Double total = (double) 0;
-			for(OrderDetail od : orderDetail) {
+			for (OrderDetail od : orderDetail) {
 				total += od.getPrice() * od.getQuantity();
 			}
 			model.addAttribute("total", total);
 			return "order/detail";
-			
+
 		}
 	}
 }

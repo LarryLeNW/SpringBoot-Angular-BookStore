@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.asm.bean.Brand;
 //import com.asm.bean.Category;
 import com.asm.bean.Product;
 //import com.asm.bean.ProductCategory;
@@ -31,39 +32,40 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Controller
 @RequestMapping("/product")
 public class ProductController {
-	@Autowired BrandService bService;
+	@Autowired
+	BrandService bService;
 //	@Autowired CategoryService cService;
-	@Autowired ProductService pService;
-	
+	@Autowired
+	ProductService pService;
+
 	@RequestMapping("/list")
-	public String home(Model model,
-			@RequestParam("kw") Optional<String> kw,
-			@RequestParam("cid") Optional<String> cid,
-			@RequestParam("bid") Optional<String> bid, 
-			@RequestParam("p") Optional<Integer> p) {
-			if(cid.isPresent()) {
-//				Page<Product> lstProduct = pService.findProductByCategory(cid, p);
-//				List<Map<String, Object>> products = pService.listProductSearch(lstProduct);
-//				model.addAttribute("page", lstProduct);
-//				model.addAttribute("products", products);
-			}else if(bid.isPresent()) {
+	public String home(Model model, @RequestParam("kw") Optional<String> kw, @RequestParam("cid") Optional<String> cid,
+			@RequestParam("bid") Optional<String> bid, @RequestParam("p") Optional<Integer> p) {
+
+		System.out.println("fill brand list " + bid);
+
+		try {
+			if (bid.isPresent()) {
+				System.out.println(bid);
 				Page<Product> lstProduct = pService.findProductByBrand(bid, p);
 				List<Map<String, Object>> products = pService.listProductSearch(lstProduct);
 				model.addAttribute("page", lstProduct);
 				model.addAttribute("products", products);
-			}else {
+			} else {
 				Page<Product> lstProduct = pService.searchProductByName(kw, p);
 				List<Map<String, Object>> products = pService.listProductSearch(lstProduct);
 				model.addAttribute("page", lstProduct);
 				model.addAttribute("products", products);
 			}
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+
 		return "product/list";
 	}
-	
-	
+
 	@GetMapping("/list/brand")
-	public String filterByListBrand(Model model,
-			@RequestParam("bid") List<String> bid,
+	public String filterByListBrand(Model model, @RequestParam("bid") List<String> bid,
 			@RequestParam("p") Optional<Integer> p) {
 		Page<Product> lstProduct = pService.findProductByListBrand(bid, p);
 		List<Map<String, Object>> products = pService.listProductSearch(lstProduct);
@@ -71,56 +73,45 @@ public class ProductController {
 		model.addAttribute("products", products);
 		return "product/list";
 	}
+
 	@GetMapping("/list/price/{price}")
-	public String filterByPrice(Model model,
-			@PathVariable("price") String price,
+	public String filterByPrice(Model model, @PathVariable("price") String price,
 			@RequestParam("p") Optional<Integer> p) {
-		if(price.equalsIgnoreCase("under100")) {
+		if (price.equalsIgnoreCase("under100")) {
 			Page<Product> lstProduct = pService.findProductLessThanPrice(100000.0, p);
 			List<Map<String, Object>> products = pService.listProductSearch(lstProduct);
-			model.addAttribute("page",lstProduct);
+			model.addAttribute("page", lstProduct);
 			model.addAttribute("products", products);
-		}
-		else if(price.equalsIgnoreCase("100-300")) {
+		} else if (price.equalsIgnoreCase("100-300")) {
 			Page<Product> lstProduct = pService.findProductBetweenPrice(100000.0, 300000.0, p);
 			List<Map<String, Object>> products = pService.listProductSearch(lstProduct);
-			model.addAttribute("page",lstProduct);
+			model.addAttribute("page", lstProduct);
 			model.addAttribute("products", products);
-		}
-		else if(price.equalsIgnoreCase("300-900")) {
+		} else if (price.equalsIgnoreCase("300-900")) {
 			Page<Product> lstProduct = pService.findProductBetweenPrice(300000.0, 900000.0, p);
 			List<Map<String, Object>> products = pService.listProductSearch(lstProduct);
-			model.addAttribute("page",lstProduct);
+			model.addAttribute("page", lstProduct);
 			model.addAttribute("products", products);
-		}
-		else if(price.equalsIgnoreCase("over900")) {
+		} else if (price.equalsIgnoreCase("over900")) {
 			Page<Product> lstProduct = pService.findByPriceGreaterThanEqual(900000.0, p);
 			List<Map<String, Object>> products = pService.listProductSearch(lstProduct);
-			model.addAttribute("page",lstProduct);
+			model.addAttribute("page", lstProduct);
 			model.addAttribute("products", products);
 		}
 		return "product/list";
 	}
+
 	@RequestMapping("/detail/{id}")
-	public String detail(Model model,
-			@PathVariable("id") Long id) {
+	public String detail(Model model, @PathVariable("id") Long id) {
 		Map<String, Object> map = pService.ProductDetail(id);
-		Product product = (Product) map.get("product");
-		model.addAttribute("product",product);
-		
-		
-		
-		
-//		model.addAttribute("product",product);
-//		List<ProductCategory> productCates = product.getProductCategories();
-//		List<String> categories = new ArrayList<String>();
-//		for (ProductCategory productCate : productCates){
-//			categories.add(productCate.getCategory().getId());
-//		}
-//		Optional<Integer> p = Optional.of(0);
-//		Page<Product> pageProduct = pService.findProductByListCategory(categories, p);
-//		List<Map<String, Object>> products = pService.listProductSearch(pageProduct);
-//		model.addAttribute("productsRcm", new ArrayList<Product>());
+		model.addAttribute("product", map.get("product"));
+		model.addAttribute("images", map.get("images"));
+		Brand brandDetail = ((Product) map.get("product")).getBrand();
+		Optional<Integer> p = Optional.of(0);
+		Optional<String> bid = Optional.ofNullable(brandDetail.getId());
+		Page<Product> pageProduct = pService.findProductByBrand(bid, p);
+		List<Map<String, Object>> products = pService.listProductSearch(pageProduct);
+		model.addAttribute("relatedListProduct", products);
 		return "product/product-detail";
 	}
 }

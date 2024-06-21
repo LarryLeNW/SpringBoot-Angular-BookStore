@@ -1,6 +1,5 @@
 package com.asm.bean;
 
-import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -10,9 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -20,45 +17,31 @@ import javax.persistence.TemporalType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@SuppressWarnings("serial")
+
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "Products")
-public class Product implements Serializable {
+@Table(name = "Favourites")
+public class Favourite {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
-	@Column(columnDefinition = "nvarchar(MAX)")
-	private String name;
-
-	@Column(columnDefinition = "nvarchar(MAX)")
-	private String description;
-
-	private Double price;
-
+	
 	@Temporal(TemporalType.DATE)
 	@Column(name = "createdate")
 	private Date createDate = new Date();
-
-	private Boolean available;
-
-	@ManyToOne
-	@JoinColumn(name = "brandid")
-	Brand brand;
 	
-	private String images;
-
-	@JsonIgnore
-	@OneToMany(mappedBy = "product")
-	List<OrderDetail> orderDetails;
-
+	@ManyToOne
+	@JoinColumn(name = "accountId")
+	Account account;
+	
+	@ManyToOne
+	@JoinColumn(name = "productId")
+	Product product;
 }

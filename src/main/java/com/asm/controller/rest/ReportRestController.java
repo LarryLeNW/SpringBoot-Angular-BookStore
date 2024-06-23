@@ -39,7 +39,6 @@ public class ReportRestController {
 		Integer month = this.monthCurrent();
 		Map<String, Object> db = new HashMap<String, Object>();
 		db.put("totalCustomer", aService.countUserByRole("USER"));
-		
 		List<Order> orders = oService.findOrderInMonth(month);
 		Double totalCost = 0.0;
 		for(Order order : orders ) {

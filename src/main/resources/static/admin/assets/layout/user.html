@@ -82,9 +82,9 @@
                             <button ng-disabled="frmAccount.$invalid || chon == true" ng-click="create()"
                                 class="btn btn-primary">Create</button>
                             <button ng-disabled="frmAccount.$invalid || frmAccount.$pristine || chon == false"
-                                ng-click="update(account.username)" class="btn btn-info">Update</button>
+                                ng-click="update(account.id)" class="btn btn-info">Update</button>
                             <button ng-click="reset()" class="btn btn-secondary">Reset</button>
-                            <button ng-disabled="chon == false" ng-click="delete(account.username)"
+                            <button ng-disabled="chon == false" ng-click="delete(account.id)"
                                 class="btn btn-dark">Delete</button>
                         </form>
                     </div>
@@ -134,9 +134,8 @@
                                 <td>{{a.email}}</td>
                                 <td>{{a.activated?'Yes':'No'}}</td>
                                 <td class="text-right">
-                                    <button ng-click="edit(a.username)" class="btn btn-primary">Edit</button>
-                                    <button ng-click="delete(a.username)" class="btn btn-dark">Delete</button>
-
+                                    <button ng-click="edit(a.id)" class="btn btn-primary">Edit</button>
+                                    <button ng-click="delete(a.id)" class="btn btn-dark">Delete</button>
                                 </td>
                             </tr>
                         </tbody>

@@ -3,15 +3,15 @@
 <%@taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <div>
 	<!--Search Form Drawer-->
-	<div class="search">
+	<div class="search border border-warning">
 		<div class="search__form">
 			<form class="search-bar__form" action="/product/list">
 				<button class="go-btn search__button" type="submit">
 					<i class="icon anm anm-search-l"></i>
 				</button>
-				<input class="search__input" type="search" name="kw"
+				<input class="search__input " type="search" name="kw"
 					value="${sessionScope.keywords}"
-					placeholder="Search entire store..." aria-label="Search"
+					placeholder="Tìm kiếm sản phẩm ..." aria-label="Search"
 					autocomplete="off">
 			</form>
 			<button type="button" class="search-trigger close-btn">
@@ -19,6 +19,14 @@
 			</button>
 		</div>
 	</div>
+
+	<div id="notification" ng-show="${alert.message != null}"
+		ng-class="{
+		'bg-warning': ${alert.type == 'warning'} , 
+		'bg-danger': ${alert.type == 'error'} , 
+		'bg-success': ${alert.type == 'success'}}">${alert.message}
+	</div>
+
 	<!--End Search Form Drawer-->
 	<!--Top Header-->
 	<div class="top-header">
@@ -37,9 +45,7 @@
 					<ul class="customer-links list-inline">
 						<c:if test="${not empty sessionScope.user }">
 							<li><a class="fw-bold" href="#">
-									${sessionScope.user.username }</a></li>
-							<li><a href="/order/list">Đơn hàng</a></li>
-							<li><a href="#">Sản phẩm yêu thích</a></li>
+								 Hello	${sessionScope.user.username }</a></li>
 						</c:if>
 						<c:if test="${empty sessionScope.user }">
 							<li><a href="/login">Login</a></li>
@@ -79,10 +85,12 @@
 					<nav class="grid__item" id="AccessibleNav">
 						<!-- for mobile -->
 						<ul id="siteNav" class="site-nav medium right hidearrow">
-							<li class="lvl1 parent megamenu"><a href="/">🏠 Trang chủ
-							</a> </li>
-							<li class="lvl1 parent megamenu"><a href="/product/list?kw=">Danh
+							<li class="lvl1 parent megamenu"><a class="fs-5 text-primary" href="/">🏠 Trang
+									chủ </a></li>
+							<li class="lvl1 parent megamenu"><a class="fs-6" href="/product/list?kw=">📃 Danh
 									Sách Sản phẩm <i class="anm anm-angle-down-l"></i>
+							<li class="lvl1 parent megamenu"><a class="fs-6" href="#">🔜 Giới thiệu<i class="anm anm-angle-down-l"></i>
+							<li class="lvl1 parent megamenu"><a class="fs-6" href="#">💬 Liên hệ <i class="anm anm-angle-down-l"></i>
 							</a>
 								<div class="megamenu style4">
 									<ul class="grid grid--uniform mmWrapper">
@@ -98,9 +106,6 @@
 									</ul>
 								</div></li>
 							</a>
-
-							<li class="lvl1"><a href="#"><b>Buy Now!</b> <i
-									class="anm anm-angle-down-l"></i></a></li>
 
 						</ul>
 					</nav>
@@ -123,30 +128,4 @@
 		</div>
 	</div>
 	<!--End Header-->
-	<!--Mobile Menu-->
-	<div class="mobile-nav-wrapper" role="navigation">
-		<div class="closemobileMenu">
-			<i class="icon anm anm-times-l pull-right"></i> Đóng Menu
-		</div>
-		<ul id="MobileNav" class="mobile-nav">
-			<li class="lvl1 parent megamenu"><a href="/home/index">trang
-					chủ </a></li>
-			<li class="lvl1 parent megamenu"><a href="#">sản phẩm <i
-					class="anm anm-plus-l"></i></a>
-				<ul>
-					<li><a href="product-layout-1.html" class="site-nav"> </a></li>
-					<c:forEach var="cate" items="${brands}">
-						<li><a href="/product/list?cate=${cate.id}" class="site-nav">${cate.name}</a></li>
-					</c:forEach>
-				</ul></li>
-			<li class="lvl1 parent megamenu"><a href="product-layout-1.html">Thương
-					hiệu <i class="anm anm-plus-l"></i>
-			</a>
-				<ul>
-					<li><a href="product-layout-1.html" class="site-nav"> </a></li>
-				</ul></li>
-			<li class="lvl1"><a href="#"><b>Buy Now!</b></a></li>
-		</ul>
-	</div>
-	<!--End Mobile Menu-->
 </div>

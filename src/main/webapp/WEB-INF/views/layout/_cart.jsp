@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <div class="col-4 col-sm-3 col-md-3 col-lg-2">
 	<c:if test="${not empty sessionScope.user }">
-		<div class="site-cart ml-5 ">
+		<div class="site-cart ml-5" style="z-index: 99998">
 			<span href="#" class="site-header__userinfo" title="Userinfo"
 				id="dropdownMenuButton1" data-bs-toggle="dropdown"
 				aria-expanded="false"> <img alt=""
@@ -10,8 +10,8 @@
 				style="border-radius: 50%;">
 			</span>
 			<ul class="dropdown-menu p-1" aria-labelledby="dropdownMenuButton1">
-				<li><a class="dropdown-item" href="#">Cập nhật thông tin</a></li>
-				<li><a class="dropdown-item" href="#">Đơn hàng đã mua</a></li>
+				<li><a class="dropdown-item" href="/account/updateInfo">Cập nhật thông tin</a></li>
+				<li><a class="dropdown-item" href="/order/list">Đơn hàng đã mua</a></li>
 				<li><a class="dropdown-item" href="/favourite/list">Sản phẩm yêu thích</a></li>
 				<hr>
 				<button type="button" class="btn btn-danger w-100"><a href="/logout" class="text-light d-block">Logout</a></button>
@@ -29,7 +29,7 @@
 			<ul class="mini-products-list">
 				<li ng-repeat="i in cart.items" class="item"><a
 					class="product-image" href="#"> <img
-						ng-src="/images/product/{{convertImage(i.images)}}"
+						ng-src="/images/product/{{i.images}}"
 						alt="{{i.name}}" title="" />
 				</a>
 					<div class="product-details">

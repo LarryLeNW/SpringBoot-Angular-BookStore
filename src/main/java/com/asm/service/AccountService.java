@@ -26,6 +26,8 @@ public interface AccountService {
 	void deleteById(Long id);
 
 	boolean existsById(Long id);
+	
+	Account findById(Long id);
 
 
 }

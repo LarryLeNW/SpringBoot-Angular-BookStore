@@ -615,7 +615,7 @@ a.quick-view { margin-bottom:5px !important; }
 .sidebar h2, .sidebar .h2 { margin-bottom:20px; font-size:15px; }
 .sidebar .sidebar_widget .widget-content ul { margin:0 0 15px; list-style:none; }
 .sidebar .sidebar_widget .widget-content ul li { list-style:none; padding:3px 0; font-size:12px; }
-.filterBox ul:not(.filter-color) { margin-left:-5px; list-style:none; }
+.filterBox ul:not(.filter-color) { list-style:none; }
 .filterBox ul:not(.filter-color) li { padding:3px 0; }
 .filterBox ul:not(.filter-color) input[type="checkbox"] { width:20px; height:auto; margin:0; padding:0; font-size:1em; opacity:0; }
 .filterBox ul:not(.filter-color) input[type="checkbox"] + label { display:inline-block; margin-left:-20px; line-height:1.5em; cursor:pointer; margin-bottom:0; }

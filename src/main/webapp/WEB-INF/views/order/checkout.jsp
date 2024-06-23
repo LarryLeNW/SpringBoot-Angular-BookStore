@@ -51,36 +51,16 @@
 
 			<div class="container">
 				<div class="row">
-					<div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-3">
-						<div class="customer-box returning-customer">
+					<div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-3 ">
+						<div class="customer-box returning-customer bg-warning">
 							<h3>
-								<i class="icon anm anm-user-al"></i> EDIT ACCOUNT? <a href="#customer-login" id="customer"
+								<i class="icon anm anm-user-al"></i> EDIT ACCOUNT? <a href="/account/updateInfo" id="customer"
 									class="text-white text-decoration-underline"
 									data-toggle="collapse">Click here</a>
 							</h3>
 						</div>
 					</div>
 
-					<div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-3">
-						<div class="customer-box customer-coupon">
-							<h3 class="font-15 xs-font-13">
-								<i class="icon anm anm-gift-l"></i> Do you have voucher? <a
-									href="#have-coupon"
-									class="text-white text-decoration-underline"
-									data-toggle="collapse">Click here to add voucher</a>
-							</h3>
-							<div id="have-coupon" class="collapse coupon-checkout-content">
-								<div class="discount-coupon">
-									<div id="coupon" class="coupon-dec tab-pane active">
-										<label class="required get" for="coupon-code"><span
-											class="required-f">*</span> Voucher</label> <input id="coupon-code"
-											required="" type="text" class="mb-3">
-										<button class="coupon-btn btn" type="submit">USE VOUCHER</button>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
 				</div>
 
 				<div class="row billing-fields">
@@ -178,7 +158,7 @@
 							<hr />
 									<div class="order-button-payment">
 										<button ng-disabled="frmOrder.$invalid"
-											ng-click="order.purchase()" class="btn" value="Place order"
+											ng-click="order.purchase()" class="btn btn-warning" value="Place order"
 											type="submit">Submit</button>
 									</div>
 								</div>

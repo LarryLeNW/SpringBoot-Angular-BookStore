@@ -39,23 +39,18 @@ public class ProductController {
 	ProductService pService;
 
 	@RequestMapping("/list")
-	public String home(Model model, @RequestParam("kw") Optional<String> kw, @RequestParam("cid") Optional<String> cid,
-			@RequestParam("bid") Optional<String> bid, @RequestParam("p") Optional<Integer> p) {
-
+	public String home(Model model, @RequestParam("kw") Optional<String> kw, @RequestParam("bid") Optional<String> bid,
+			@RequestParam("p") Optional<Integer> p) {
 		System.out.println("fill brand list " + bid);
-
 		try {
 			if (bid.isPresent()) {
-				System.out.println(bid);
-				Page<Product> lstProduct = pService.findProductByBrand(bid, p);
-				List<Map<String, Object>> products = pService.listProductSearch(lstProduct);
-				model.addAttribute("page", lstProduct);
-				model.addAttribute("products", products);
+				Page<Product> dataPageProduct = pService.findProductByBrand(bid, p);
+				model.addAttribute("products", dataPageProduct.getContent());
+				model.addAttribute("infoPage", dataPageProduct);
 			} else {
-				Page<Product> lstProduct = pService.searchProductByName(kw, p);
-				List<Map<String, Object>> products = pService.listProductSearch(lstProduct);
-				model.addAttribute("page", lstProduct);
-				model.addAttribute("products", products);
+				Page<Product> dataPageProduct = pService.searchProductByName(kw, p);
+				model.addAttribute("products", dataPageProduct.getContent());
+				model.addAttribute("infoPage", dataPageProduct);
 			}
 		} catch (Exception e) {
 			System.out.println(e);
@@ -67,10 +62,9 @@ public class ProductController {
 	@GetMapping("/list/brand")
 	public String filterByListBrand(Model model, @RequestParam("bid") List<String> bid,
 			@RequestParam("p") Optional<Integer> p) {
-		Page<Product> lstProduct = pService.findProductByListBrand(bid, p);
-		List<Map<String, Object>> products = pService.listProductSearch(lstProduct);
-		model.addAttribute("page", lstProduct);
-		model.addAttribute("products", products);
+		Page<Product> dataPageProduct = pService.findProductByListBrand(bid, p);
+		model.addAttribute("products", dataPageProduct.getContent());
+		model.addAttribute("infoPage", dataPageProduct);
 		return "product/list";
 	}
 
@@ -78,40 +72,34 @@ public class ProductController {
 	public String filterByPrice(Model model, @PathVariable("price") String price,
 			@RequestParam("p") Optional<Integer> p) {
 		if (price.equalsIgnoreCase("under100")) {
-			Page<Product> lstProduct = pService.findProductLessThanPrice(100000.0, p);
-			List<Map<String, Object>> products = pService.listProductSearch(lstProduct);
-			model.addAttribute("page", lstProduct);
-			model.addAttribute("products", products);
+			Page<Product> dataPageProduct = pService.findProductLessThanPrice(100000.0, p);
+			model.addAttribute("products", dataPageProduct.getContent());
+			model.addAttribute("infoPage", dataPageProduct);
 		} else if (price.equalsIgnoreCase("100-300")) {
-			Page<Product> lstProduct = pService.findProductBetweenPrice(100000.0, 300000.0, p);
-			List<Map<String, Object>> products = pService.listProductSearch(lstProduct);
-			model.addAttribute("page", lstProduct);
-			model.addAttribute("products", products);
+			Page<Product> dataPageProduct = pService.findProductBetweenPrice(100000.0, 300000.0, p);
+			model.addAttribute("products", dataPageProduct.getContent());
+			model.addAttribute("infoPage", dataPageProduct);
 		} else if (price.equalsIgnoreCase("300-900")) {
-			Page<Product> lstProduct = pService.findProductBetweenPrice(300000.0, 900000.0, p);
-			List<Map<String, Object>> products = pService.listProductSearch(lstProduct);
-			model.addAttribute("page", lstProduct);
-			model.addAttribute("products", products);
+			Page<Product> dataPageProduct = pService.findProductBetweenPrice(300000.0, 900000.0, p);
+			model.addAttribute("products", dataPageProduct.getContent());
+			model.addAttribute("infoPage", dataPageProduct);
 		} else if (price.equalsIgnoreCase("over900")) {
-			Page<Product> lstProduct = pService.findByPriceGreaterThanEqual(900000.0, p);
-			List<Map<String, Object>> products = pService.listProductSearch(lstProduct);
-			model.addAttribute("page", lstProduct);
-			model.addAttribute("products", products);
+			Page<Product> dataPageProduct = pService.findByPriceGreaterThanEqual(900000.0, p);
+			model.addAttribute("products", dataPageProduct.getContent());
+			model.addAttribute("infoPage", dataPageProduct);
 		}
 		return "product/list";
 	}
 
 	@RequestMapping("/detail/{id}")
 	public String detail(Model model, @PathVariable("id") Long id) {
-		Map<String, Object> map = pService.ProductDetail(id);
-		model.addAttribute("product", map.get("product"));
-		model.addAttribute("images", map.get("images"));
-		Brand brandDetail = ((Product) map.get("product")).getBrand();
+		Product productFound = pService.ProductDetail(id);
+		model.addAttribute("product", productFound);
+		Brand brandDetail = productFound.getBrand();
 		Optional<Integer> p = Optional.of(0);
 		Optional<String> bid = Optional.ofNullable(brandDetail.getId());
 		Page<Product> pageProduct = pService.findProductByBrand(bid, p);
-		List<Map<String, Object>> products = pService.listProductSearch(pageProduct);
-		model.addAttribute("relatedListProduct", products);
+		model.addAttribute("relatedListProduct", pageProduct.getContent());
 		return "product/product-detail";
 	}
 }

@@ -65,30 +65,12 @@
 									<div class="zoompro-wrap product-zoom-right pl-20">
 										<div class="zoompro-span">
 											<img class="blur-up lazyload zoompro"
-												data-zoom-image="/images/product/${images[0]}" alt=""
-												src="/images/product/${images[0]}" />
+												data-zoom-image="/images/product/${product.images}" alt=""
+												src="/images/product/${product.images}" />
 										</div>
 										<div class="product-buttons">
 											<a href="#" class="btn prlightbox" title="Zoom"><i
 												class="icon anm anm-expand-l-arrows" aria-hidden="true"></i></a>
-										</div>
-									</div>
-									<div class="lightboximages">
-										<c:forEach var="i" items="${images}">
-											<a href="/images/product/${i}" data-size="1462x2048"></a>
-										</c:forEach>
-									</div>
-									<div class="product-thumb">
-										<div id="gallery"
-											class="product-dec-slider-2 product-tab-left">
-											<c:forEach var="i" items="${images}">
-												<a data-image="/images/product/${i}"
-													data-zoom-image="/images/product/${i}"
-													class="slick-slide slick-cloned" data-slick-index="-4"
-													aria-hidden="true" tabindex="-1"> <img
-													class="blur-up lazyload" src="/images/product/${i}" alt="" />
-												</a>
-											</c:forEach>
 										</div>
 									</div>
 								</div>
@@ -117,7 +99,7 @@
 										</span>
 									</p>
 									<div class="product-single__description rte ">
-										<p style="font-size: 1.7rem">${product.description}</p>
+										<p style="font-size: 1.2rem">${product.description}</p>
 									</div>
 									<form method="post" action="http://annimexweb.com/cart/add"
 										id="product_form_10508262282" accept-charset="UTF-8"
@@ -146,34 +128,36 @@
 									</h2>
 								</header>
 								<div class="productPageSlider">
-									<c:forEach var="p" items="${relatedListProduct}">
-										<c:if test="${p.product.id ne product.id}">
+									<c:forEach var="productRL" items="${relatedListProduct}">
+										<c:if test="${productRL.id ne product.id}">
 											<div class="col-12 item">
 												<!-- start product image -->
 												<div class="product-image">
 													<!-- start product image -->
-													<a href="/product/detail/${p.product.id}"> <!-- image -->
+													<a href="/product/detail/${productRL.id}"> <!-- image -->
 														<img class="product-rcm primary blur-up lazyload"
-														data-src="/images/product/${p.images[0]}"
+														data-src="/images/product/${productRL.images}"
 														src="/images/product/${p.images[0]}"
-														alt="${p.product.name}" title="${p.product.name}"> <!-- End image -->
+														alt="${productRL.name}" title="${productRL.name}"> <!-- End image -->
 														<!-- Hover image --> <img class="hover blur-up lazyload"
-														data-src="/images/product/${p.images[1]}"
-														src="/images/product/${p.images[1]}"
-														alt="${p.product.name}" title="${p.product.name}"> <!-- End hover image -->
+														data-src="/images/product/${productRL.images}"
+														src="/images/product/${productRL.images}"
+														alt="${productRL.name}" title="${productRL.name}"> <!-- End hover image -->
 													</a>
 													<!-- end product image -->
 
 													<!-- Start product button -->
 													<form class="variants add">
-														<button ng-click="cart.add(${p.product.id})"
+														<button ng-click="cart.add(${productRL.id})"
 															class="btn btn-addto-cart" type="button" tabindex="0">ADD
 															TO CART</button>
 													</form>
 													<div class="button-set">
 														<div class="wishlist-btn">
-															<a class="wishlist add-to-wishlist" href="wishlist.html">
-																<i class="icon anm anm-heart-l"></i>
+															<a class="wishlist add-to-wishlist"
+																href="/favourite/add/${productRL.id}"
+																title="Add to Wishlist"> <i
+																class="icon anm anm-heart-l"></i>
 															</a>
 														</div>
 													</div>

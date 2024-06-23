@@ -20,7 +20,7 @@ public class InterceptorConfig implements WebMvcConfigurer{
 			.addPathPatterns("/**")
 			.excludePathPatterns("/admin/**","/assets/**");
 		registry.addInterceptor(auth)
-			.addPathPatterns("/admin/**", "/order/**");
+			.addPathPatterns("/admin/**", "/order/**","/favourite/**","/account/**");
 	}
 	
 	

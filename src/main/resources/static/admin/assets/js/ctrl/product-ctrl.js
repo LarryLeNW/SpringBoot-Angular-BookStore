@@ -60,25 +60,23 @@ app.controller("product-ctrl", function($scope, $http) {
 
 	//HAM UPLOAD HINH
 	$scope.imageChanged = function(files) {
-		$scope.product.images = [];
+		$scope.product.images = null;
 		var form = new FormData();
-		for (var i = 0; i < files.length; i++) {
-			form.append("files", files[i]);
-		}
-
+		form.append("files", files[0]);
 		$scope.showImages = true;
+
 		$http.post('/admin/rest/upload/product/product', form, {
 			transformRequest: angular.identity,
 			headers: { 'Content-Type': undefined }
 		}).then(resp => {
-			for (var i = 0; i < $scope.product.images.length; i++) {
-				if ($scope.product.images[i] == "logo.jpg") {
-					$scope.product.images.splice(i, 1);
-				}
-			}
-			for (var i = 0; i < resp.data.length; i++) {
-				$scope.product.images.push(resp.data[i].filename);
-			}
+			$scope.product.images = resp.data[0].filename;
+			console.log(resp.data[0].filename);
+			$scope.alert = {type : "success" , message : "upload ảnh thành công ..."};
+			//	for (var i = 0; i < $scope.product.images.length; i++) {
+			//	if ($scope.product.images[i] == "logo.jpg") {
+				//	$scope.product.images.splice(i, 1);
+				//}
+			//}
 		}).catch(error => {
 			console.log("error", error);
 			alert("Upload image fail");
@@ -95,18 +93,18 @@ app.controller("product-ctrl", function($scope, $http) {
 			p: {
 				name: product.name,
 				price: +product.price,
-				description : product.description,
+				description: product.description,
 				createDate: product.createDate,
 				available: product.available,
 				brand: {
 					id: product.brand.id,
 				},
-				images: JSON.stringify(product.images),
+				images: product.images,
 			}
 		}
-		
+
 		$http.post(urlProduct, data).then(resp => {
-			resp.data.images = JSON.parse(resp.data.images);
+			// resp.data.images = JSON.parse(resp.data.images);
 			$scope.db.products.push(resp.data);
 			alert("Add Product Success")
 			$scope.reset();
@@ -115,7 +113,7 @@ app.controller("product-ctrl", function($scope, $http) {
 			console.log(error)
 		})
 	};
-	
+
 	//HAM UPDATE
 	$scope.update = function(id) {
 		var product = angular.copy($scope.product);
@@ -123,18 +121,20 @@ app.controller("product-ctrl", function($scope, $http) {
 			p: {
 				id: product.id,
 				name: product.name,
-				description : product.description,
+				description: product.description,
 				price: +product.price,
 				createDate: product.createDate,
 				available: product.available,
 				brand: {
 					id: product.brand.id,
 				},
-				images: JSON.stringify(product.images),
+				images: product.images,
 			}
 		}
+		
+		
 		$http.put(`${urlProduct}/${id}`, data).then(resp => {
-			resp.data.images = JSON.parse(resp.data.images);
+		//	resp.data.images = JSON.parse(resp.data.images);
 			var index = $scope.db.products.findIndex(p => p.id == resp.data.id);
 			$scope.db.products[index] = resp.data;
 			alert("Update Product Success")
@@ -143,6 +143,7 @@ app.controller("product-ctrl", function($scope, $http) {
 			console.log(error)
 		})
 	};
+	
 	//HAM DELETE
 	$scope.delete = function(id) {
 		$http.delete(`${urlProduct}/${id}`).then(resp => {
@@ -160,6 +161,7 @@ app.controller("product-ctrl", function($scope, $http) {
 			console.log(error);
 		})
 	}
+
 	// HAM RESET
 	$scope.reset = function() {
 		$scope.product = {
@@ -169,22 +171,24 @@ app.controller("product-ctrl", function($scope, $http) {
 			createDate: new Date(),
 			available: true,
 			brand: { id: "BRZ" },
-			images: ["logo.jpg"],
+			images: "logo.jpg",
 		}
 		$scope.chon = false;
-		$scope.showImages = false; 
+		$scope.showImages = false;
 	};
-	
-	
+
+
 	//HAM CHECK BANG CATEGORY
 	$scope.indexOf = function(pid, cid) {
 		return $scope.db.productCates.findIndex(pc => pc.product.id == pid && pc.category.id == cid);
 	};
+
 	//HAM UPDATE TEN BRAND KHI CREATE PRODUCT
 	$scope.brandName = function(bid) {
 		var index = $scope.db.brands.findIndex(b => b.id == bid);
 		return $scope.db.brands[index].name;
 	};
+
 	//HAM CHECK PRODUCT CATEGORY
 	$scope.updateProductCates = function(pid, cid) {
 		var index = $scope.indexOf(pid, cid);
@@ -203,7 +207,7 @@ app.controller("product-ctrl", function($scope, $http) {
 			})
 		}
 	};
-	//TIM KIEM PRODUCT
+	//SEARCH PRODUCT
 	$scope.search = function(kw) {
 		$http.get(`${urlProduct}/search?kw=${kw}`).then(resp => {
 			$scope.db.products = resp.data;

@@ -129,26 +129,21 @@
 						</div>
 					</div>
 					<div class="container-product-rw-custom">
-							<c:forEach var="d" items="${db}" end="14">
+							<c:forEach var="product" items="${productPageHome}" end="14">
 								<div
 									class="product-rw-custom">
-									<div class="rw-product">
 										<!-- start product image -->
-										<a href="/product/detail/${d.product.id}"
+										<a href="/product/detail/${product.id}"
 											class=""> <!-- image --> 
 											<img
-											src="/images/product/${d.images[0]}" alt="${d.product.name}"
-											title="${d.product.name}"> <!-- End image --> <!-- Hover image -->
-											<h6>${d.product.name}</h6>
+											src="/images/product/${product.images}" alt="${product.images}"
+											title="${product.name}"> <!-- End image --> <!-- Hover image -->
+											<h6>${product.name}</h6>
 												<div class="product-price">
-												<span class="price">${d.product.price} vnđ</span>
+												<span class="price">${product.price} vnđ</span>
 											</div>
 											<button type="button" class="btn btn-success text-center">Xem ngay 🔥</button>
 										</a>
-										<!-- End product label -->
-										<!-- End Variant -->
-										<!-- End product details -->
-									</div>
 								</div>
 							</c:forEach>
 

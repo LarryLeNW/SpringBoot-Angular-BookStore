@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html class="no-js" lang="en">
 
@@ -21,12 +22,15 @@
 <link rel="stylesheet" href="/assets/css/style.css">
 <link rel="stylesheet" href="/assets/css/custom.css">
 <link rel="stylesheet" href="/assets/css/responsive.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <!-- angularjs -->
 <script
 	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
 </head>
+
 
 <body ng-app="shopping-app" ng-controller="shopping-ctrl"
 	class="template-index belle home5-cosmetic">
@@ -37,68 +41,58 @@
 		<%@include file="../layout/_header.jsp"%>
 
 		<!--Body Content-->
-		<div id="page-content">
-			<!--Collection Banner-->
-			<div class="collection-header">
-				<div class="collection-hero">
-					<div class="collection-hero__image">
-						
-					</div>
-					<div class="collection-hero__title-wrapper">
-						<h1 class="collection-hero__title page-width">LIST PRODUCT</h1>
-					</div>
-				</div>
-			</div>
+		<div id="page-content" style="margin-top: 100px ;"  >
+			
 			<!--End Collection Banner-->
 
 			<div class="container mt-5">
-				<div class="row">
+				<div class="row mt-5">
 					<!--Sidebar-->
-					<div class="col-12 col-sm-12 col-md-3 col-lg-3 sidebar filterbar">
+					<div class="col-12 col-sm-12 col-md-3 col-lg-3 border border-4 border-warning-subtle rounded">
 						<div class="closeFilter d-block d-md-none d-lg-none">
 							<i class="icon icon anm anm-times-l"></i>
 						</div>
 						<div class="sidebar_tags">
 							<!--Categories-->
-							<div class="sidebar_widget categories filter-widget">
-								<div class="widget-title">
-									<h2>Danh mục sản phẩm</h2>
+							<div >
+								<div class="widget-title text-success">
+									<h2>Filter : </h2>
 								</div>
 							</div>
 							<!--Categories-->
 							<!--Price Filter-->
 							<div class="sidebar_widget filterBox filter-widget">
-								<div class="widget-title">
-									<h2>Giá</h2>
+								<div class="widget-title text-warning">
+									<h3 >Giá : </h3>
 								</div>
 								<form action="">
 									<button formaction="/product/list/price/under100"
-										class="btn mb-2 btn--secondary">Dưới 100K</button>
+										class="btn mb-2 btn-primary">Dưới 100K</button>
 									<button formaction="/product/list/price/100-300"
-										class="btn mb-2 btn--secondary">Từ 100K - 300K</button>
+										class="btn mb-2 btn-primary">Từ 100K - 300K</button>
 									<button formaction="/product/list/price/300-900"
-										class="btn mb-2 btn--secondary">Từ 300K - 900K</button>
+										class="btn mb-2 btn-primary">Từ 300K - 900K</button>
 									<button formaction="/product/list/price/over900"
-										class="btn mb-2 btn--secondary">Trên 900K</button>
+										class="btn mb-2 btn-primary">Trên 900K</button>
 								</form>
 							</div>
 							<!--End Price Filter-->
 
 							<!--Brand-->
 							<div class="sidebar_widget filterBox filter-widget">
-								<div class="widget-title">
-									<h2>Lọc theo loại</h2>
+								<div class="widget-title text-warning">
+									<h4>Lọc theo loại</h4>
 								</div>
-								<ul>
+								<ul >
 									 <form action="/product/list/brand" method="GET" onsubmit="return validateForm();">
 										<c:forEach var="b" items="${brands}">
 											<li>
-												<input type="checkbox" name="bid" value="${b.id}"
-													id="check1">
-												<label for="check1"><span><span></span></span>${b.name}</label>
+												<input type="checkbox" class="btn-check"  name="bid" value="${b.id}"
+													id="${b.id}">
+												<label for="${b.id}" class="btn btn-outline-primary" ><span><span></span></span>${b.name}</label>
 												</li>
 											</c:forEach>
-										<button class="btn mt-2">Lọc</button>
+										<button class="btn btn-primary rounded w-100 mt-2"><<< Lọc ngay >>></button>
 									</form>
 								</ul>
 							</div>
@@ -119,7 +113,7 @@
 									<div class="row">
 
 
-										<div class="col-4 col-md-4 col-lg-4 text-left">
+								<!--  <div class="col-4 col-md-4 col-lg-4 text-left">
 											<div class="filters-toolbar__item">
 												<label for="SortBy" class="hidden">Sort</label> <select
 													name="SortBy" id="SortBy"
@@ -133,7 +127,7 @@
 												</select> <input class="collection-header__default-sort"
 													type="hidden" value="manual">
 											</div>
-										</div>
+										</div> -->	
 
 									</div>
 								</div>
@@ -141,40 +135,38 @@
 							<!--End Toolbar-->
 							<div class="grid-products grid--view-items">
 								<div class="row">
-									<c:forEach var="p" items="${products}">
+									<c:forEach var="product" items="${products}">
 										<div class="col-6 col-sm-6 col-md-4 col-lg-4 item">
 											<!-- start product image -->
 											<div class="product-image">
 												<!-- start product image -->
-												<a href="/product/detail/${p.product.id}"> <!-- image -->
+												<a href="/product/detail/${product.id}"> <!-- image -->
 													<img class="product primary blur-up lazyload"
-													data-src="/images/product/${p.images[0]}"
-													src="/images/product/${p.images[0]}"
-													alt="${p.product.name}" title="${p.product.name}">
+													data-src="/images/product/${product.images}"
+													src="/images/product/${product.images}"
+													alt="${product.name}" title="${product.name}">
 													<!-- End image --> <!-- Hover image --> <img
 													class="product hover blur-up lazyload"
-													data-src="/images/product/${p.images[0]}"
-													src="/images/product/${p.images[0]}"
-													alt="${p.product.name}" title="${p.product.name}">
+													data-src="/images/product/${product.images}"
+													src="/images/product/${product.images}"
+													alt="${product.name}" title="${product.name}">
 													<!-- End hover image -->
 												</a>
 												<!-- end product image -->
 
 												<!-- Start product button -->
 												<form class="variants add">
-													<button ng-click="cart.add(${p.product.id})"
+													<button ng-click="cart.add(${product.id})"
 														class="btn btn-addto-cart" type="button">Add To
 														Cart</button>
 												</form>
 												<div class="button-set">
-
-													<div class="wishlist-btn">
-														<a class="wishlist add-to-wishlist" href="#"
+													<div class="wishlist-btn" >
+														<a class="wishlist add-to-wishlist" href="/favourite/add/${product.id}"
 															title="Add to Wishlist"> <i
 															class="icon anm anm-heart-l"></i>
 														</a>
 													</div>
-
 												</div>
 												<!-- end product button -->
 											</div>
@@ -184,22 +176,15 @@
 											<div class="product-details text-center">
 												<!-- product name -->
 												<div class="product-name">
-													<a href="/product/detail/${p.product.id}">${p.product.name}</a>
+													<a href="/product/detail/${product.id}">${product.name}</a>
 												</div>
 												<!-- End product name -->
 												<!-- product price -->
 												<div class="product-price">
-													<span class="price">${p.product.price}</span>
+													<span class="price"><fmt:formatNumber value="${product.price}"  maxFractionDigits="0" /> đ </span>
 												</div>
 												<!-- End product price -->
-												<!-- Variant -->
-												<ul class="swatches">
-													<c:forEach var="i" items="${p.images}">
-														<li class="swatch medium rounded"><img
-															src="/images/product/${i}" alt="image" /></li>
-													</c:forEach>
-												</ul>
-												<!-- End Variant -->
+											
 											</div>
 											<!-- End product details -->
 										</div>
@@ -212,11 +197,11 @@
 							<ul>
 								<li class="active mr-2"><a href="/product/list?p=0">|<</a></li>
 								<li class="active mr-2"><a
-									href="/product/list?p=${page.number-1}"><<</a></li>
+									href="/product/list?p=${infoPage.number-1}"><<</a></li>
 								<li class="active mr-2"><a
-									href="/product/list?p=${page.number+1}">>></a></li>
+									href="/product/list?p=${infoPage.number+1}">>></a></li>
 								<li class="active mr-2"><a
-									href="/product/list?p=${page.totalPages-1}">>|</a></li>
+									href="/product/list?p=${infoPage.totalPages-1}">>|</a></li>
 							</ul>
 						</div>
 					</div>

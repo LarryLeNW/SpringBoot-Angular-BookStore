@@ -93,6 +93,9 @@ app.controller("shopping-ctrl", function($scope, $http) {
 			});
 		}
 	}
+	
+
+	
 });
 
 

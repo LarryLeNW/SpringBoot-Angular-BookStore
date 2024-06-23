@@ -28,7 +28,7 @@
 </head>
 
 <body ng-app="shopping-app" ng-controller="shopping-ctrl"
-	class="template-index belle home5-cosmetic">
+	class="template-index belle home5-cosmetic " >
 	<div id="pre-loader">
 		<img src="/assets/images/loader.gif" alt="Loading..." />
 	</div>
@@ -37,18 +37,18 @@
 
 		<!--Body Content-->
 		<!--Body Content-->
-		<div id="page-content">
+		<div id="page-content " >
 			<!--Page Title-->
 			<div class="page section-header text-center">
 				<div class="page-title">
 					<div class="wrapper">
-						<h1 class="page-width">My order</h1>
+						<h1 class="page-width"></h1>
 					</div>
 				</div>
 			</div>
 			<!--End Page Title-->
 
-			<div class="container">
+			<div class="container" style="margin :  100px 0 ">
 				<div class="row">
 					<div class="col-12 col-sm-12 col-md-12 col-lg-12 main-col">
 						<form action="#">
@@ -76,7 +76,7 @@
 														class="amount">${o.total}</span></td>
 													<td class="product-subtotal text-center"><a
 														href="/order/detail/${o.order.id}"
-														class="btn btn-small text-white">Xem chi tiết</a></td>
+														class="btn btn-primary">Xem chi tiết</a></td>
 												</tr>
 										</c:forEach>
 									</tbody>

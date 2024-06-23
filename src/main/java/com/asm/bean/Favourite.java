@@ -33,6 +33,13 @@ public class Favourite {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	public Favourite(Date createDate, Account account, Product product) {
+		super();
+		this.createDate = createDate;
+		this.account = account;
+		this.product = product;
+	}
+
 	@Temporal(TemporalType.DATE)
 	@Column(name = "createdate")
 	private Date createDate = new Date();

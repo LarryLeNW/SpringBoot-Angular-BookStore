@@ -3,6 +3,7 @@ package com.asm.controller;
 import java.sql.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.asm.bean.Account;
+import com.asm.bean.Alert;
 import com.asm.bean.Favourite;
 import com.asm.bean.Product;
 import com.asm.service.AccountService;
@@ -36,9 +38,6 @@ public class HomeController {
 	AccountService aService;
 	@Autowired
 	MailerService mailer;
-	
-	@Autowired
-	FavouriteService fService;
 
 	@RequestMapping("/admin")
 	public String admin() {
@@ -48,13 +47,8 @@ public class HomeController {
 	@RequestMapping("/")
 	public String home(Model model) {
 		// load ds product xep theo ngay tao
-		model.addAttribute("db", pService.findProductByCreateDateDESC());
-		
-		System.out.println("------------------------------------");
-		fService.save(new Favourite());
-		System.out.println(fService.findAll());
-		System.out.println("------------------------------------");
-		
+		model.addAttribute("alert", new Alert("success", "Welcome to my store..."));
+		model.addAttribute("productPageHome", pService.findProductByCreateDateDESC());
 		return "home/index";
 	}
 
@@ -69,8 +63,7 @@ public class HomeController {
 	}
 
 	@PostMapping("/register")
-	public String signup(Model model,
-			@ModelAttribute Account account) {
+	public String signup(Model model, @ModelAttribute Account account) {
 		if (aService.findByUsername(account.getUsername()) != null) {
 			model.addAttribute("error", "Đã tồn tại username " + account.getUsername());
 			return "register";
@@ -96,13 +89,12 @@ public class HomeController {
 	}
 
 	@PostMapping("/login")
-	public String login(@RequestParam("username") String username,
-			@RequestParam("password") String password,
+	public String login(@RequestParam("username") String username, @RequestParam("password") String password,
 			Model model) {
 		try {
 			Account account = aService.findByUsername(username);
 			if (!account.getPassword().equals(password)) {
-				model.addAttribute("message", "Invalid password");
+				return "redirect:/";
 			} else {
 				String uri = session.get("security-uri");
 				session.set("user", account);
@@ -110,13 +102,13 @@ public class HomeController {
 					session.set("userAdmin", "admin");
 					return "admin/index";
 				}
-				model.addAttribute("message", "Login success");
+				model.addAttribute("alert", new Alert("success", "Login success"));
 				return "redirect:/";
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			// TODO: handle exception
-			model.addAttribute("message", "Invalid username");
+			model.addAttribute("alert", new Alert("error", "Invalid username"));
 		}
 		return "login";
 	}
@@ -165,4 +157,33 @@ public class HomeController {
 		}
 		return "forgot";
 	}
+
+	@GetMapping("account/updateInfo")
+	public String getPageUpdateInfo(Model model) {
+		Account account = session.get("user");
+		model.addAttribute("account", account);
+		return "updateInfo";
+	}
+
+	@PostMapping("/account/updateInfo")
+    public String updateAccountInfo(@ModelAttribute("account") Account account, Model model) {
+        if (account.getId() == null) {
+            model.addAttribute("alert", new Alert("error", "ID không được để trống"));
+            return "updateInfo";
+        }
+        
+        if (!aService.existsById(account.getId())) {
+            model.addAttribute("alert", new Alert("danger", "Không tìm thấy user này"));
+        } else {
+            try {
+                aService.save(account);
+                session.set("user", account);
+                model.addAttribute("alert", new Alert("success", "Sửa thành công..."));
+            } catch (Exception e) {
+                model.addAttribute("alert", new Alert("warning", "Sửa không thành công..."));
+            }
+        }
+        return "updateInfo";
+    }
+
 }

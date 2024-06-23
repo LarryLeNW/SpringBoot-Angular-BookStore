@@ -25,12 +25,7 @@ public class AuthInterceptor implements HandlerInterceptor {
 
 		if (account == null) {
 			error = "Please Login";
-		} else {
-			if (account.getRoleId().equals("user") && uri.startsWith("/admin")) {
-				error = "Access Denied";
-			}
-		}
-
+		} 
 		if (error.length() > 0) {
 			session.set("security-uri", uri);
 			response.sendRedirect("/login?message=" + error);

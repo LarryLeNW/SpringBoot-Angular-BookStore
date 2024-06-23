@@ -28,6 +28,7 @@ public class Brand implements Serializable{
 	private String name;
 	
 	private String image;
+	
 	@JsonIgnore
 	@OneToMany(mappedBy = "brand")
 	private List<Product> products;

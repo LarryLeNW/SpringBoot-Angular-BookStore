@@ -42,7 +42,6 @@ app.controller("dashboard-ctrl", function ($scope, $http) {
   });
 
   $http.get('/admin/rest/report/bestSellerInMonth').then(resp => {
-	
     $scope.productInMonth = resp.data;
 	console.log(resp.data)
     for(var i = 0; i < $scope.productInMonth.length; i++){

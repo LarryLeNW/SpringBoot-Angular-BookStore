@@ -36,7 +36,7 @@ public interface ProductService {
 
 //	ProductCategory saveProductCates(ProductCategory productCates);
 
-	List<Map<String, Object>> findProductByCreateDateDESC();
+	List<Product> findProductByCreateDateDESC();
 	
 	Page<Product> searchProductByName(Optional<String> kw, Optional<Integer> p);
 
@@ -54,7 +54,7 @@ public interface ProductService {
 	
 	List<Map<String, Object>> listProductSearch(Page<Product> lstProduct);
 
-	Map<String, Object> ProductDetail(Long id);
+	Product ProductDetail(Long id);
 	
 //	Page<Product> findProductByListCategory(List<String> cid, Optional<Integer> p);
 	

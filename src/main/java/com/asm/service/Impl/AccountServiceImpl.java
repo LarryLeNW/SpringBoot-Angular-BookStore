@@ -60,8 +60,10 @@ public class AccountServiceImpl implements AccountService {
 		
 	}
 
-	
-
+	@Override
+	public Account findById(Long id) {
+		return aRepo.findById(id).get();
+	}
 
 
 //	 @Override

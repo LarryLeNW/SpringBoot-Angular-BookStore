@@ -13,5 +13,9 @@ public interface FavouriteService {
 	
 	Favourite save(Favourite favourite);
 	
+	List<Favourite> findByUserId(Long userId); 
+
+	Favourite checkStatusFavourite(Long userId, Long productId); 
 	
+	void deleteById(Long id);
 }
